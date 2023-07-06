@@ -1,8 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Context } from "../context";
-import FormInput from "./FormInput/FormInput";
 import { Employee, PopUpVariant } from "../constants";
 import style from "./Form.module.scss";
+
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import TextError from "./TextError/TextError";
 
 interface FormProps {
   addNewEmployee?: (emp: Employee) => void;
@@ -12,7 +15,7 @@ interface FormProps {
   listLength?: number;
 }
 
-const Form: React.FC<FormProps> = ({
+const FormComponent: React.FC<FormProps> = ({
   addNewEmployee = () => {},
   formAction,
   editEmployee = () => {},
@@ -28,30 +31,31 @@ const Form: React.FC<FormProps> = ({
   },
 }) => {
   const { togglePopUp } = useContext(Context);
-  const employeeData: Employee =
-    formAction === PopUpVariant.ADD_NEW_EMPLOYEE
-      ? {
-          name: "",
-          age: "",
-          office: "",
-          startDate: "",
-          salary: "",
-          position: "",
-          id: listLength + 1,
-        }
-      : { ...employeeToEdit };
 
-  const [employeeInfo, setEmployeeInfo] = useState<Employee>(employeeData);
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("Name is required"),
+    age: Yup.number().required("Age is required"),
+    office: Yup.string().required("Office is required"),
+    startDate: Yup.string().required("Start Date is required"),
+    salary: Yup.string().required("Salary is required"),
+    position: Yup.string().required("Position is required"),
+  });
 
-  const handleChange = (fieldName: string, value: string) => {
-    setEmployeeInfo({ ...employeeInfo, [fieldName]: value });
+  const initialValues = {
+    name: "",
+    age: "",
+    office: "",
+    startDate: "",
+    salary: "",
+    position: "",
+    id: listLength + 1,
   };
-  const handleFormSubmited = (e: React.FormEvent) => {
-    e.preventDefault();
+
+  const handleFormSubmited = (values: Employee) => {
     if (formAction === PopUpVariant.ADD_NEW_EMPLOYEE) {
-      addNewEmployee(employeeInfo);
+      addNewEmployee(values);
     } else {
-      editEmployee(employeeInfo);
+      editEmployee(values);
     }
     togglePopUp();
   };
@@ -65,7 +69,7 @@ const Form: React.FC<FormProps> = ({
         required: true,
         name: "name",
         placeHolder: "John Doe",
-        value: employeeInfo.name,
+        value: initialValues.name,
       },
       {
         label: "Position",
@@ -74,7 +78,7 @@ const Form: React.FC<FormProps> = ({
         required: true,
         name: "position",
         placeHolder: "Accountant",
-        value: employeeInfo.position,
+        value: initialValues.position,
       },
       {
         label: "Office",
@@ -83,7 +87,7 @@ const Form: React.FC<FormProps> = ({
         required: true,
         name: "office",
         placeHolder: "Tokyo",
-        value: employeeInfo.office,
+        value: initialValues.office,
       },
       {
         label: "Age",
@@ -92,7 +96,7 @@ const Form: React.FC<FormProps> = ({
         required: true,
         name: "age",
         placeHolder: "35",
-        value: employeeInfo.age,
+        value: initialValues.age,
       },
       {
         label: "Start Date",
@@ -101,7 +105,7 @@ const Form: React.FC<FormProps> = ({
         required: true,
         name: "startDate",
         placeHolder: "2012/03/29",
-        value: employeeInfo.startDate,
+        value: initialValues.startDate,
       },
       {
         label: "Salary",
@@ -110,43 +114,52 @@ const Form: React.FC<FormProps> = ({
         required: true,
         name: "salary",
         placeHolder: "$433,060",
-        value: employeeInfo.salary,
+        value: initialValues.salary,
       },
     ];
 
     return fields.map((item) => {
       return (
-        <FormInput
-          key={item.name}
-          label={item.label}
-          id={item.id}
-          type={item.type}
-          required={item.required}
-          name={item.name}
-          placeHolder={item.placeHolder}
-          value={employeeInfo[item.name]}
-          onChangeHandler={handleChange}
-        />
+        <div className={style.inputWrapper} key={item.id}>
+          <label htmlFor={item.id}>{item.name}</label>
+          <Field
+            type={item.type}
+            id={item.id}
+            name={item.name}
+            placeholder={item.placeHolder}
+          />
+          <ErrorMessage name={item.name} component={TextError} />
+        </div>
       );
     });
   };
+
   return (
-    <div>
+    <div className={style.wrapper}>
       <h1>
         {formAction === PopUpVariant.ADD_NEW_EMPLOYEE
           ? "Add new employee"
           : "Edit Employee"}
       </h1>
-      <form onSubmit={handleFormSubmited} className={style.wrapper}>
-        {generateFormFields()}
-        <button type="submit">
-          {formAction === PopUpVariant.ADD_NEW_EMPLOYEE
-            ? "Add new employee"
-            : "Edit Employee"}
-        </button>
-      </form>
+      <Formik
+        initialValues={employeeToEdit || initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleFormSubmited}
+        enableReinitialize={true}
+      >
+        {(formik) => (
+          <Form>
+            {generateFormFields()}
+            <button type="submit">
+              {formAction === PopUpVariant.ADD_NEW_EMPLOYEE
+                ? "Add new employee"
+                : "Edit Employee"}
+            </button>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
 
-export default Form;
+export default FormComponent;

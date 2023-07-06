@@ -1,8 +1,8 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  min-width: 60rem;
+  align-items: stretch;
+  width: 60rem;
   padding: 2rem;
   h1 {
     margin-bottom: 3rem;
@@ -11,12 +11,35 @@
   button {
     padding: 1rem;
     margin: 0 auto;
-    background: #012b39;
+    background: darkGreen;
     color: white;
     border-radius: 0.25em;
     &:hover {
       background-color: green;
       color: white;
+    }
+
+    &:disabled {
+      background-color: grey;
+      cursor: not-allowed;
+    }
+  }
+
+  .inputWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 1rem;
+
+    input {
+      width: 100%;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    label {
+      margin-bottom: 1rem;
+      text-transform: capitalize;
     }
   }
 }
