@@ -25,10 +25,14 @@ const MyTable: React.FC<MyTableProps> = ({
       return (
         <th key={item.title}>
           <span>{item.title}</span>
-          <button onClick={() => handleSort(SortOrder.ASCENDING, item.sortProperty)}>
+          <button
+            onClick={() => handleSort(SortOrder.ASCENDING, item.sortProperty)}
+          >
             &#8593;
           </button>
-          <button onClick={() => handleSort(SortOrder.DESCENDING, item.sortProperty)}>
+          <button
+            onClick={() => handleSort(SortOrder.DESCENDING, item.sortProperty)}
+          >
             &#8595;
           </button>
         </th>

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../context";
 import FormInput from "./FormInput/FormInput";
 import { Employee, PopUpVariant } from "../constants";
 import style from "./Form.module.scss";
 
 interface FormProps {
   addNewEmployee?: (emp: Employee) => void;
-  togglePopUp: (v?: string) => void;
   formAction: string;
   editEmployee?: (emp: Employee) => void;
   employeeToEdit?: Employee;
@@ -14,7 +14,6 @@ interface FormProps {
 
 const Form: React.FC<FormProps> = ({
   addNewEmployee = () => {},
-  togglePopUp,
   formAction,
   editEmployee = () => {},
   listLength = 0,
@@ -28,6 +27,7 @@ const Form: React.FC<FormProps> = ({
     id: listLength + 1,
   },
 }) => {
+  const { togglePopUp } = useContext(Context);
   const employeeData: Employee =
     formAction === PopUpVariant.ADD_NEW_EMPLOYEE
       ? {
@@ -40,7 +40,7 @@ const Form: React.FC<FormProps> = ({
           id: listLength + 1,
         }
       : { ...employeeToEdit };
-      
+
   const [employeeInfo, setEmployeeInfo] = useState<Employee>(employeeData);
 
   const handleChange = (fieldName: string, value: string) => {

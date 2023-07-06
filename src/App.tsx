@@ -1,4 +1,6 @@
 import { useState } from "react";
+import React, { useContext } from "react";
+import { Context } from "./context";
 import employees from "./employees.json";
 import MyTable from "./MyTable/MyTable";
 import PopUp from "./PopUp/PopUp";
@@ -9,6 +11,9 @@ import "./globals.scss";
 import style from "./App.module.scss";
 
 const App: React.FC = () => {
+  const { state, togglePopUp } = useContext(Context);
+  const { popUpIsOpen, popUpVariant } = state;
+
   const employeesString = JSON.stringify(employees);
   const employeesParsed = JSON.parse(employeesString);
   const addedIdToTheEmployeesList = employeesParsed.map(
@@ -24,10 +29,6 @@ const App: React.FC = () => {
   );
   const [employeeIndex, setEmployeeIndex] = useState<number | null>(null);
   const [employeeToEdit, setEmployeeToEdit] = useState<Employee>();
-  const [showPopUp, setShowPopUp] = useState<boolean>(false);
-  const [popUpVariant, setPopUpVariant] = useState<string>(
-    PopUpVariant.ADD_NEW_EMPLOYEE
-  );
 
   const sortingAscending = (property: string) => {
     const sorted = employeesList.sort((a: any, b: any) => {
@@ -116,7 +117,7 @@ const App: React.FC = () => {
       return item;
     });
     setEmployeesList([...newList]);
-    setShowPopUp(!showPopUp);
+    togglePopUp();
   };
 
   const handleRemoveEmployee = () => {
@@ -124,7 +125,7 @@ const App: React.FC = () => {
       (employee: Employee, index: number) => employeeIndex !== index
     );
     setEmployeesList([...newList]);
-    setShowPopUp(!showPopUp);
+    togglePopUp();
   };
 
   const handleRemoveEmployeePopUp = (
@@ -132,19 +133,12 @@ const App: React.FC = () => {
     eIndex: number
   ) => {
     event.stopPropagation();
-    setShowPopUp(!showPopUp);
-    setPopUpVariant(PopUpVariant.CONFIRM);
+    togglePopUp(PopUpVariant.CONFIRM);
     setEmployeeIndex(eIndex);
   };
   const handleEditEmployeePopUp = (employee: Employee) => {
-    setShowPopUp(!showPopUp);
-    setPopUpVariant(PopUpVariant.EDIT_EMPLOYEE);
+    togglePopUp(PopUpVariant.EDIT_EMPLOYEE);
     setEmployeeToEdit(employee);
-  };
-
-  const togglePopUp = (variant: string = PopUpVariant.ADD_NEW_EMPLOYEE) => {
-    setShowPopUp(!showPopUp);
-    setPopUpVariant(variant);
   };
 
   const generatePopUpChildren = () => {
@@ -154,24 +148,17 @@ const App: React.FC = () => {
           <Form
             formAction={PopUpVariant.ADD_NEW_EMPLOYEE}
             addNewEmployee={addNewEmployee}
-            togglePopUp={togglePopUp}
             listLength={employeesList.length}
           />
         );
       case PopUpVariant.CONFIRM:
-        return (
-          <ConfirmAction
-            confirmed={handleRemoveEmployee}
-            togglePopUp={togglePopUp}
-          />
-        );
+        return <ConfirmAction confirmed={handleRemoveEmployee} />;
       default:
         return (
           <Form
             formAction={PopUpVariant.EDIT_EMPLOYEE}
             editEmployee={editEmployee}
             employeeToEdit={employeeToEdit}
-            togglePopUp={togglePopUp}
           />
         );
     }
@@ -191,9 +178,7 @@ const App: React.FC = () => {
         handleRemoveEmployee={handleRemoveEmployeePopUp}
         handleEditEmployee={handleEditEmployeePopUp}
       />
-      <PopUp show={showPopUp} togglePopUp={togglePopUp}>
-        {generatePopUpChildren()}
-      </PopUp>
+      <PopUp show={popUpIsOpen}>{generatePopUpChildren()}</PopUp>
     </div>
   );
 };
