@@ -8,16 +8,12 @@ import "./globals.scss";
 import style from "./App.module.scss";
 
 const App: React.FC = () => {
-  const { state, togglePopUp } = useContext(ContextUI);
-  const { popUpIsOpen, popUpVariant } = state;
+  const { stateUI, togglePopUp } = useContext(ContextUI);
+  const { popUpIsOpen, popUpVariant } = stateUI;
 
   const generatePopUpChildren = () => {
     if (popUpVariant === PopUpVariant.ADD_NEW_EMPLOYEE) {
-      return (
-        <Form
-          formAction={PopUpVariant.ADD_NEW_EMPLOYEE}
-        />
-      );
+      return <Form formAction={PopUpVariant.ADD_NEW_EMPLOYEE} />;
     } else {
       return <Form formAction={PopUpVariant.EDIT_EMPLOYEE} />;
     }
@@ -32,7 +28,7 @@ const App: React.FC = () => {
         Add new
       </button>
       <MyTable />
-      <PopUp show={popUpIsOpen}>{generatePopUpChildren()}</PopUp>
+      {popUpIsOpen && <PopUp>{generatePopUpChildren()}</PopUp>}
     </div>
   );
 };

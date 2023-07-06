@@ -51,6 +51,8 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
     selectedEmployee: null,
   });
 
+
+
   const setEmployeesList = (data: Employee[]) => {
     setState({
       ...state,
@@ -91,6 +93,7 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
       selectedEmployee: data,
     });
   };
+
 
   const sortingAscending = (property: string) => {
     const sorted = state.employeesList.sort((a: any, b: any) => {

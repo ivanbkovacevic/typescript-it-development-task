@@ -7,12 +7,12 @@ interface ContextState {
 }
 
 interface ContextProps {
-  state: ContextState;
+  stateUI: ContextState;
   togglePopUp: (v?: string ) => void;
 }
 
 const ContextUI = React.createContext<ContextProps>({
-  state: {
+  stateUI: {
     popUpIsOpen: false,
     popUpVariant: PopUpVariant.ADD_NEW_EMPLOYEE,
   },
@@ -20,15 +20,15 @@ const ContextUI = React.createContext<ContextProps>({
 });
 
 function ContextUIProvider(props: React.PropsWithChildren<{}>) {
-  const [state, setState] = React.useState<ContextState>({
+  const [stateUI, setState] = React.useState<ContextState>({
     popUpIsOpen: false,
     popUpVariant: PopUpVariant.ADD_NEW_EMPLOYEE,
   });
 
   const togglePopUp = (variant: string = PopUpVariant.ADD_NEW_EMPLOYEE) => {
     setState({
-      ...state,
-      popUpIsOpen: !state.popUpIsOpen,
+      ...stateUI,
+      popUpIsOpen: !stateUI.popUpIsOpen,
       popUpVariant: variant,
     });
   };
@@ -37,7 +37,7 @@ function ContextUIProvider(props: React.PropsWithChildren<{}>) {
   return (
     <ContextUI.Provider
       value={{
-        state,
+        stateUI,
         togglePopUp,
       }}
     >

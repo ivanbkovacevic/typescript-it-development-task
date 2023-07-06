@@ -13,9 +13,11 @@ interface FormProps {
 }
 
 const FormComponent: React.FC<FormProps> = ({ formAction }) => {
-  const { state, addNewEmployee, editEmployee } = useContext(Context);
+  const { state, addNewEmployee, editEmployee, selectEmployee } =
+    useContext(Context);
   const { selectedEmployee, employeesList } = state;
-  const { togglePopUp } = useContext(ContextUI);
+  const { togglePopUp, stateUI } = useContext(ContextUI);
+  const { popUpIsOpen, popUpVariant } = stateUI;
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
@@ -35,7 +37,7 @@ const FormComponent: React.FC<FormProps> = ({ formAction }) => {
     position: "",
     id: 0,
   };
-
+  console.log(selectedEmployee);
   const handleFormSubmited = (values: Employee, actions: any) => {
     if (formAction === PopUpVariant.ADD_NEW_EMPLOYEE) {
       addNewEmployee({ ...values, id: employeesList.length + 1 });
@@ -45,6 +47,12 @@ const FormComponent: React.FC<FormProps> = ({ formAction }) => {
     actions.resetForm();
     togglePopUp();
   };
+
+  useEffect(() => {
+    if (popUpVariant === PopUpVariant.ADD_NEW_EMPLOYEE) {
+     selectEmployee(null);
+    }
+  }, []);
 
   const generateFormFields = () => {
     const fields = [

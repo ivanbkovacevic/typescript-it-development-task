@@ -4,23 +4,18 @@ import style from "./PopUp.module.scss";
 
 interface PopUpProps {
   children: React.ReactNode;
-  show: boolean;
 }
 
-const PopUp: React.FC<PopUpProps> = ({ children, show }) => {
+const PopUp: React.FC<PopUpProps> = ({ children }) => {
   const { togglePopUp } = useContext(ContextUI);
 
   return (
-    <>
-      {show && (
-        <div className={style.overlay}>
-          <div className={style.wrapper}>
-            <button onClick={() => togglePopUp()}>&#10006;</button>
-            {children}
-          </div>
-        </div>
-      )}
-    </>
+    <div className={style.overlay}>
+      <div className={style.wrapper}>
+        <button onClick={() => togglePopUp()}>&#10006;</button>
+        {children}
+      </div>
+    </div>
   );
 };
 
