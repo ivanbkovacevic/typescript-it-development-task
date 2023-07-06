@@ -44,7 +44,7 @@ const MyTable: React.FC<MyTableProps> = ({
     );
     const tableRows = pageSettedList.map((item, index) => {
       return (
-        <tr key={item.id} onClick={() => handleEditEmployee(item)}>
+        <tr key={item.id} onDoubleClick={() => handleEditEmployee(item)}>
           <td>{item.id}</td>
           <td>{item.name}</td>
           <td>{item.position}</td>
