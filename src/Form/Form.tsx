@@ -17,7 +17,7 @@ const FormComponent: React.FC<FormProps> = ({ formAction }) => {
     useContext(Context);
   const { selectedEmployee, employeesList } = state;
   const { togglePopUp, stateUI } = useContext(ContextUI);
-  const { popUpIsOpen, popUpVariant } = stateUI;
+  const { popUpVariant } = stateUI;
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
