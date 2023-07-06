@@ -37,7 +37,6 @@ const FormComponent: React.FC<FormProps> = ({ formAction }) => {
     position: "",
     id: 0,
   };
-  console.log(selectedEmployee);
   const handleFormSubmited = (values: Employee, actions: any) => {
     if (formAction === PopUpVariant.ADD_NEW_EMPLOYEE) {
       addNewEmployee({ ...values, id: employeesList.length + 1 });
