@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../context/context";
 import { ContextUI } from "../context/contextUI";
 import { Employee, PopUpVariant } from "../constants";
@@ -13,10 +13,9 @@ interface FormProps {
 }
 
 const FormComponent: React.FC<FormProps> = ({ formAction }) => {
-  const { state, addNewEmployee, editEmployee, selectEmployee } =
-    useContext(Context);
-  const { togglePopUp } = useContext(ContextUI);
+  const { state, addNewEmployee, editEmployee } = useContext(Context);
   const { selectedEmployee, employeesList } = state;
+  const { togglePopUp } = useContext(ContextUI);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
@@ -37,13 +36,13 @@ const FormComponent: React.FC<FormProps> = ({ formAction }) => {
     id: 0,
   };
 
-  const handleFormSubmited = (values: Employee, { resetForm }: any) => {
+  const handleFormSubmited = (values: Employee, actions: any) => {
     if (formAction === PopUpVariant.ADD_NEW_EMPLOYEE) {
       addNewEmployee({ ...values, id: employeesList.length + 1 });
     } else {
       editEmployee(values);
     }
-    resetForm();
+    actions.resetForm();
     togglePopUp();
   };
 
