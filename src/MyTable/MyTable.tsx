@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NumOfRows from "./NumOfRows/NumOfRows";
 import Pagination from "./Pagination/Pagination";
-import { Employee, TABLE_HEADERS } from "../constants";
+import { Employee, SortOrder, TABLE_HEADERS } from "../constants";
 import style from "./MyTable.module.scss";
 
 interface MyTableProps {
@@ -25,10 +25,10 @@ const MyTable: React.FC<MyTableProps> = ({
       return (
         <th key={item.title}>
           <span>{item.title}</span>
-          <button onClick={() => handleSort("a", item.sortProperty)}>
+          <button onClick={() => handleSort(SortOrder.ASCENDING, item.sortProperty)}>
             &#8593;
           </button>
-          <button onClick={() => handleSort("d", item.sortProperty)}>
+          <button onClick={() => handleSort(SortOrder.DESCENDING, item.sortProperty)}>
             &#8595;
           </button>
         </th>

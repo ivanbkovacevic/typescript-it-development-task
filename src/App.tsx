@@ -4,7 +4,7 @@ import MyTable from "./MyTable/MyTable";
 import PopUp from "./PopUp/PopUp";
 import Form from "./Form/Form";
 import ConfirmAction from "./ConfirmAction/ConfirmAction";
-import { Employee, PopUpVariant, SortProperties } from "./constants";
+import { Employee, PopUpVariant, SortOrder, SortProperties } from "./constants";
 import "./globals.scss";
 import style from "./App.module.scss";
 
@@ -56,46 +56,47 @@ const App: React.FC = () => {
 
   const handleSort = (order: string, value: string) => {
     switch (true) {
-      case value === SortProperties.ID && order === "a":
+      case value === SortProperties.ID && order === SortOrder.ASCENDING:
         sortingAscending(SortProperties.ID);
         break;
-      case value === SortProperties.ID && order === "d":
+      case value === SortProperties.ID && order === SortOrder.DESCENDING:
         sortingDescending(SortProperties.ID);
         break;
-      case value === SortProperties.AGE && order === "a":
+      case value === SortProperties.AGE && order === SortOrder.ASCENDING:
         sortingAscending(SortProperties.AGE);
         break;
-      case value === SortProperties.AGE && order === "d":
+      case value === SortProperties.AGE && order === SortOrder.DESCENDING:
         sortingDescending(SortProperties.AGE);
         break;
-      case value === SortProperties.NAME && order === "a":
+      case value === SortProperties.NAME && order === SortOrder.ASCENDING:
         sortingAscending(SortProperties.NAME);
         break;
-      case value === SortProperties.NAME && order === "d":
+      case value === SortProperties.NAME && order === SortOrder.DESCENDING:
         sortingDescending(SortProperties.NAME);
         break;
-      case value === SortProperties.POSITION && order === "a":
+      case value === SortProperties.POSITION && order === SortOrder.ASCENDING:
         sortingAscending(SortProperties.POSITION);
         break;
-      case value === SortProperties.POSITION && order === "d":
+      case value === SortProperties.POSITION && order === SortOrder.DESCENDING:
         sortingDescending(SortProperties.POSITION);
         break;
-      case value === SortProperties.OFFICE && order === "a":
+      case value === SortProperties.OFFICE && order === SortOrder.ASCENDING:
         sortingAscending(SortProperties.OFFICE);
         break;
-      case value === SortProperties.OFFICE && order === "d":
+      case value === SortProperties.OFFICE && order === SortOrder.DESCENDING:
         sortingDescending(SortProperties.OFFICE);
         break;
-      case value === SortProperties.START_DATE && order === "a":
+      case value === SortProperties.START_DATE && order === SortOrder.ASCENDING:
         sortingAscending(SortProperties.START_DATE);
         break;
-      case value === SortProperties.START_DATE && order === "d":
+      case value === SortProperties.START_DATE &&
+        order === SortOrder.DESCENDING:
         sortingDescending(SortProperties.START_DATE);
         break;
-      case value === SortProperties.SALARY && order === "a":
+      case value === SortProperties.SALARY && order === SortOrder.ASCENDING:
         sortingAscending(SortProperties.SALARY);
         break;
-      case value === SortProperties.SALARY && order === "d":
+      case value === SortProperties.SALARY && order === SortOrder.DESCENDING:
         sortingDescending(SortProperties.SALARY);
         break;
       default:

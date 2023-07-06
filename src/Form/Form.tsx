@@ -40,6 +40,7 @@ const Form: React.FC<FormProps> = ({
           id: listLength + 1,
         }
       : { ...employeeToEdit };
+      
   const [employeeInfo, setEmployeeInfo] = useState<Employee>(employeeData);
 
   const handleChange = (fieldName: string, value: string) => {

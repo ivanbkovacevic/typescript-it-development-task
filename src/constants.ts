@@ -25,6 +25,11 @@ export const SortProperties = {
     SALARY: 'salary'
 }
 
+export const SortOrder = {
+    ASCENDING: 'a',
+    DESCENDING: 'd',
+}
+
 export const TABLE_HEADERS = [{
         title: 'Id',
         sortProperty: SortProperties.ID,
