@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { ContextProvider } from "./context";
+import { ContextProvider } from "./context/context";
+import { ContextUIProvider } from "./context/contextUI";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
@@ -11,7 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ContextProvider>
-      <App />
+      <ContextUIProvider>
+        <App />
+      </ContextUIProvider>
     </ContextProvider>
   </React.StrictMode>
 );

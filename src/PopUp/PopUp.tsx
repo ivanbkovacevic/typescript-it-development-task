@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Context } from "../context";
+import { ContextUI } from "../context/contextUI";
 import style from "./PopUp.module.scss";
 
 interface PopUpProps {
@@ -8,7 +8,7 @@ interface PopUpProps {
 }
 
 const PopUp: React.FC<PopUpProps> = ({ children, show }) => {
-  const { togglePopUp } = useContext(Context);
+  const { togglePopUp } = useContext(ContextUI);
 
   return (
     <>

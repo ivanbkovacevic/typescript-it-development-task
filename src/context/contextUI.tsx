@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { PopUpVariant } from "./constants";
+import React from "react";
+import { PopUpVariant } from "../constants";
 
 interface ContextState {
   popUpIsOpen: boolean;
@@ -8,10 +8,10 @@ interface ContextState {
 
 interface ContextProps {
   state: ContextState;
-  togglePopUp: (v?: string) => void;
+  togglePopUp: (v?: string ) => void;
 }
 
-const Context = React.createContext<ContextProps>({
+const ContextUI = React.createContext<ContextProps>({
   state: {
     popUpIsOpen: false,
     popUpVariant: PopUpVariant.ADD_NEW_EMPLOYEE,
@@ -19,7 +19,7 @@ const Context = React.createContext<ContextProps>({
   togglePopUp: () => {},
 });
 
-function ContextProvider(props: React.PropsWithChildren<{}>) {
+function ContextUIProvider(props: React.PropsWithChildren<{}>) {
   const [state, setState] = React.useState<ContextState>({
     popUpIsOpen: false,
     popUpVariant: PopUpVariant.ADD_NEW_EMPLOYEE,
@@ -33,16 +33,17 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
     });
   };
 
+
   return (
-    <Context.Provider
+    <ContextUI.Provider
       value={{
         state,
         togglePopUp,
       }}
     >
       {props.children}
-    </Context.Provider>
+    </ContextUI.Provider>
   );
 }
 
-export { Context, ContextProvider };
+export { ContextUI, ContextUIProvider };

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { Context } from "../context";
+import { Context } from "../context/context";
+import { ContextUI } from "../context/contextUI";
 import { Employee, PopUpVariant } from "../constants";
 import style from "./Form.module.scss";
 
@@ -8,29 +9,14 @@ import * as Yup from "yup";
 import TextError from "./TextError/TextError";
 
 interface FormProps {
-  addNewEmployee?: (emp: Employee) => void;
   formAction: string;
-  editEmployee?: (emp: Employee) => void;
-  employeeToEdit?: Employee;
-  listLength?: number;
 }
 
-const FormComponent: React.FC<FormProps> = ({
-  addNewEmployee = () => {},
-  formAction,
-  editEmployee = () => {},
-  listLength = 0,
-  employeeToEdit = {
-    name: "",
-    age: "",
-    office: "",
-    startDate: "",
-    salary: "",
-    position: "",
-    id: listLength + 1,
-  },
-}) => {
-  const { togglePopUp } = useContext(Context);
+const FormComponent: React.FC<FormProps> = ({ formAction }) => {
+  const { state, addNewEmployee, editEmployee, selectEmployee } =
+    useContext(Context);
+  const { togglePopUp } = useContext(ContextUI);
+  const { selectedEmployee, employeesList } = state;
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
@@ -48,15 +34,16 @@ const FormComponent: React.FC<FormProps> = ({
     startDate: "",
     salary: "",
     position: "",
-    id: listLength + 1,
+    id: 0,
   };
 
-  const handleFormSubmited = (values: Employee) => {
+  const handleFormSubmited = (values: Employee, { resetForm }: any) => {
     if (formAction === PopUpVariant.ADD_NEW_EMPLOYEE) {
-      addNewEmployee(values);
+      addNewEmployee({ ...values, id: employeesList.length + 1 });
     } else {
       editEmployee(values);
     }
+    resetForm();
     togglePopUp();
   };
 
@@ -142,21 +129,19 @@ const FormComponent: React.FC<FormProps> = ({
           : "Edit Employee"}
       </h1>
       <Formik
-        initialValues={employeeToEdit || initialValues}
+        initialValues={selectedEmployee || initialValues}
         validationSchema={validationSchema}
         onSubmit={handleFormSubmited}
         enableReinitialize={true}
       >
-        {(formik) => (
-          <Form>
-            {generateFormFields()}
-            <button type="submit">
-              {formAction === PopUpVariant.ADD_NEW_EMPLOYEE
-                ? "Add new employee"
-                : "Edit Employee"}
-            </button>
-          </Form>
-        )}
+        <Form>
+          {generateFormFields()}
+          <button type="submit">
+            {formAction === PopUpVariant.ADD_NEW_EMPLOYEE
+              ? "Add new employee"
+              : "Edit Employee"}
+          </button>
+        </Form>
       </Formik>
     </div>
   );

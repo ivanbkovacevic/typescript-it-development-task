@@ -1,22 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../context/context";
 import NumOfRows from "./NumOfRows/NumOfRows";
 import Pagination from "./Pagination/Pagination";
-import { Employee, SortOrder, TABLE_HEADERS } from "../constants";
+import { SortOrder, TABLE_HEADERS } from "../constants";
 import style from "./MyTable.module.scss";
+import TableRows from "./TableRows/TableRows";
 
-interface MyTableProps {
-  list: Employee[];
-  handleSort: (s: string, sp: string) => void;
-  handleRemoveEmployee: (e: React.MouseEvent, i: number) => void;
-  handleEditEmployee: (employees: Employee) => void;
-}
+interface MyTableProps {}
 
-const MyTable: React.FC<MyTableProps> = ({
-  list,
-  handleSort,
-  handleRemoveEmployee,
-  handleEditEmployee,
-}) => {
+const MyTable: React.FC<MyTableProps> = () => {
+  const { state, handleSort } = useContext(Context);
+  const { employeesList } = state;
+
   const [numOfRows, setNumOfRows] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -42,27 +37,12 @@ const MyTable: React.FC<MyTableProps> = ({
   };
 
   const generateTableRows = () => {
-    const pageSettedList = list.slice(
+    const pageSettedList = employeesList.slice(
       numOfRows * (currentPage - 1),
       numOfRows * currentPage
     );
     const tableRows = pageSettedList.map((item, index) => {
-      return (
-        <tr key={item.id} onDoubleClick={() => handleEditEmployee(item)}>
-          <td>{item.id}</td>
-          <td>{item.name}</td>
-          <td>{item.position}</td>
-          <td>{item.office}</td>
-          <td>{item.age}</td>
-          <td>{item.startDate}</td>
-          <td>{item.salary}</td>
-          <td>
-            <button onClick={(e) => handleRemoveEmployee(e, index)}>
-              Remove
-            </button>
-          </td>
-        </tr>
-      );
+      return <TableRows key={item.id} data={item} />;
     });
     return tableRows;
   };
@@ -84,7 +64,7 @@ const MyTable: React.FC<MyTableProps> = ({
         <tbody>{generateTableRows()}</tbody>
       </table>
       <Pagination
-        listLength={list.length}
+        listLength={employeesList.length}
         numOfRows={numOfRows}
         currentPage={currentPage}
         handlePagination={handlePagination}
