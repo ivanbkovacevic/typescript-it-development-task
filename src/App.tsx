@@ -6,16 +6,20 @@ import Form from "./Form/Form";
 import { PopUpVariant } from "./constants";
 import "./globals.scss";
 import style from "./App.module.scss";
+import ConfirmAction from "./ConfinrAction/ConfirmAction";
 
 const App: React.FC = () => {
   const { stateUI, togglePopUp } = useContext(ContextUI);
   const { popUpIsOpen, popUpVariant } = stateUI;
 
   const generatePopUpChildren = () => {
-    if (popUpVariant === PopUpVariant.ADD_NEW_EMPLOYEE) {
-      return <Form formAction={PopUpVariant.ADD_NEW_EMPLOYEE} />;
-    } else {
-      return <Form formAction={PopUpVariant.EDIT_EMPLOYEE} />;
+    switch (popUpVariant) {
+      case PopUpVariant.ADD_NEW_EMPLOYEE:
+        return <Form formAction={PopUpVariant.ADD_NEW_EMPLOYEE} />;
+      case PopUpVariant.CONFIRM:
+        return <ConfirmAction />;
+      default:
+        return <Form formAction={PopUpVariant.EDIT_EMPLOYEE} />;
     }
   };
 

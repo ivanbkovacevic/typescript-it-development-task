@@ -1,10 +1,6 @@
 import React from "react";
 import employees from "../employees.json";
-import {
-  Employee,
-  SortOrder,
-  SortProperties,
-} from "../constants";
+import { Employee, SortOrder, SortProperties } from "../constants";
 
 const employeesString = JSON.stringify(employees);
 const employeesParsed = JSON.parse(employeesString);
@@ -28,7 +24,7 @@ interface ContextProps {
   handleSort: (order: string, value: string) => void;
   addNewEmployee: (data: Employee) => void;
   editEmployee: (data: Employee) => void;
-  removeEmployee: (data: Employee) => void;
+  removeEmployee: (data: Employee | null) => void;
   selectEmployee: (data: Employee | null) => void;
 }
 
@@ -50,8 +46,6 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
     employeesList: addedIdToTheEmployeesList,
     selectedEmployee: null,
   });
-
-
 
   const setEmployeesList = (data: Employee[]) => {
     setState({
@@ -78,9 +72,9 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
       employeesList: [...newList],
     });
   };
-  const removeEmployee = (data: Employee) => {
+  const removeEmployee = (data: Employee | null) => {
     const newList = state.employeesList.filter(
-      (employee: Employee) => employee.id !== data.id
+      (employee: Employee) => employee.id !== data?.id
     );
     setState({
       ...state,
@@ -93,7 +87,6 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
       selectedEmployee: data,
     });
   };
-
 
   const sortingAscending = (property: string) => {
     const sorted = state.employeesList.sort((a: any, b: any) => {

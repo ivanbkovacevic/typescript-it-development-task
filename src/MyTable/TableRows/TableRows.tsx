@@ -8,7 +8,7 @@ interface TableRowsProps {
 }
 
 const TableRows: React.FC<TableRowsProps> = ({ data }) => {
-  const { removeEmployee, selectEmployee } = useContext(Context);
+  const { selectEmployee } = useContext(Context);
   const { togglePopUp } = useContext(ContextUI);
   return (
     <tr
@@ -29,7 +29,8 @@ const TableRows: React.FC<TableRowsProps> = ({ data }) => {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            removeEmployee(data);
+            togglePopUp(PopUpVariant.CONFIRM)
+            selectEmployee(data)
           }}
         >
           Remove
