@@ -15,7 +15,6 @@ const TableRowsProjects: React.FC<TableRowsProps> = ({ data }) => {
 
   return (
     <tr key={data.id}>
-      <td>{data.id}</td>
       <td>{data.name}</td>
       <td>
         <a href={data.productPage} target="_blank" rel="noreferrer">
@@ -24,7 +23,12 @@ const TableRowsProjects: React.FC<TableRowsProps> = ({ data }) => {
       </td>
       <td>{data.articlePageText}</td>
       <td>{data.htmlEmail}</td>
-      <td>{data.pageLink}</td>
+      <td>
+        {" "}
+        <a href={data.productPage} target="_blank" rel="noreferrer">
+          {data.pageLink.substring(8)}
+        </a>
+      </td>
       <td>
         <img src={data.productImg} alt={data.productImgAltText} />
         <ControlledPopup src={data.productImg} alt={data.productImgAltText} />
