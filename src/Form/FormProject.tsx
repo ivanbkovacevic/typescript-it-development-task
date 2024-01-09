@@ -19,6 +19,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
   const { togglePopUp, stateUI } = useContext(ContextUI);
   const { popUpVariant } = stateUI;
 
+  console.log(selectedProject)
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     productPage: Yup.string().required("Project Page is required"),
@@ -27,6 +28,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     htmlEmail: Yup.string().required("Html email is required"),
     pageLink: Yup.string().required("Page link is required"),
     productImg: Yup.string().required("Project image is required"),
+    productImgAltText: Yup.string().required("Project image alt text is required"),
   });
 
   const initialValues = {
@@ -37,6 +39,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     htmlEmail: "",
     pageLink: "",
     productImg: "",
+    productImgAltText: "",
     id: 0,
   };
   const handleFormSubmited = (values: Project, actions: any) => {
@@ -44,6 +47,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
       addNewProject({ ...values, id: projectsList.length + 1 });
     } else {
       editProject(values);
+      console.log('edit')
     }
     actions.resetForm();
     togglePopUp();
@@ -71,25 +75,43 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         id: "productImg",
         type: "text",
         required: true,
-        name: "productImg",
+        name: "Product Image",
         placeHolder: "some image",
         value: initialValues.productImg,
+      },
+      {
+        label: "Product image alt Text",
+        id: "productImgAltText",
+        type: "text",
+        required: true,
+        name: "Product Image alt Text",
+        placeHolder: "some image text",
+        value: initialValues.productImgAltText,
       },
       {
         label: "Article Page text",
         id: "articlePageText",
         type: "text",
         required: true,
-        name: "articlePageText",
+        name: "Article page text",
         placeHolder: "This page is something",
         value: initialValues.articlePageText,
+      },
+      {
+        label: "Html Email",
+        id: "htmlEmail",
+        type: "text",
+        required: true,
+        name: "Html email",
+        placeHolder: "html email",
+        value: initialValues.htmlEmail,
       },
       {
         label: "Product page",
         id: "productPage",
         type: "text",
         required: true,
-        name: "productPage",
+        name: "Product page",
         placeHolder: "www.something",
         value: initialValues.productPage,
       },
@@ -98,7 +120,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         id: "articlePageLink",
         type: "text",
         required: true,
-        name: "articlePageLink",
+        name: "Article page link",
         placeHolder: "www.something",
         value: initialValues.articlePageLink,
       },
@@ -107,7 +129,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         id: "pageLink",
         type: "text",
         required: true,
-        name: "pageLink",
+        name: "Page link",
         placeHolder: "www.something...",
         value: initialValues.articlePageLink,
       },
@@ -129,9 +151,10 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     });
   };
 
+  console.log(initialValues)
   return (
     <div className={style.wrapper}>
-      <h1>
+      <h1 className={style.heading}>
         {formAction === PopUpVariant.ADD_NEW_PROJECT
           ? "Add new project"
           : "Edit Project"}
