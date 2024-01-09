@@ -1,0 +1,52 @@
+[
+    {
+        "name": "SonicGlow Pick",
+        "productPage": "https://www.sonicglow.com",
+        "articlePageText": "Some article text",
+        "articlePageLink": "https://www.sonicglow.com",
+        "htmlEmail": "htmlEmail",
+        "pageLink": "www...",
+        "productImg": "../../assets/red-light-mask.jpg",
+        "productImgAltText": "red-light-mask"
+      },
+    {
+        "name": "SonicGlow Pick1",
+        "productPage": "https://www.sonicglow.com",
+        "articlePageText": "Some article text",
+        "articlePageLink": "https://www.sonicglow.com",
+        "htmlEmail": "htmlEmail",
+        "pageLink": "www...",
+        "productImg": "../../assets/red-light-mini-wand.jpg",
+        "productImgAltText": "red-light-mini-wand"
+      },
+    {
+        "name": "SonicGlow Pick2",
+        "productPage": "https://www.sonicglow.com",
+        "articlePageText": "Some article text",
+        "articlePageLink": "https://www.sonicglow.com",
+        "htmlEmail": "htmlEmail",
+        "pageLink": "www...",
+        "productImg": "../../assets/red-light-teeth.jpg",
+        "productImgAltText": "red-light-teeth"
+      },
+    {
+        "name": "SonicGlow Pick3",
+        "productPage": "https://www.sonicglow.com",
+        "articlePageText": "Some article text",
+        "articlePageLink": "https://www.sonicglow.com",
+        "htmlEmail": "htmlEmail",
+        "pageLink": "www...",
+        "productImg": "../../assets/red-light-wand.jpg",
+        "productImgAltText": "red-light-wand"
+      },
+    {
+        "name": "SonicGlow Pick4",
+        "productPage": "https://www.sonicglow.com",
+        "articlePageText": "Some article text",
+        "articlePageLink": "https://www.sonicglow.com",
+        "htmlEmail": "htmlEmail",
+        "pageLink": "www...",
+        "productImg": "../../assets/red-light.jpg",
+        "productImgAltText": "red-light-mask"
+      }
+]

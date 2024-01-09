@@ -33,6 +33,10 @@
   .disabled td {
     color: #4f5f64;
   }
+
+  img {
+    max-width: 100px;
+  }
   tbody tr {
     transition: background 0.25s ease;
     cursor: pointer;

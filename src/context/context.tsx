@@ -1,6 +1,7 @@
 import React from "react";
 import employees from "../employees.json";
-import { Employee, SortOrder, SortProperties } from "../constants";
+import projects from "../projects.json";
+import { Employee, SortOrder, SortProperties, Project } from "../constants";
 
 const employeesString = JSON.stringify(employees);
 const employeesParsed = JSON.parse(employeesString);
@@ -12,39 +13,65 @@ const addedIdToTheEmployeesList = employeesParsed.map(
     };
   }
 );
+const projectsString = JSON.stringify(projects);
+const productsParsed = JSON.parse(projectsString);
+const addedIdToTheprojectsList = productsParsed.map(
+  (item: Project, index: number) => {
+    return {
+      ...item,
+      id: index + 1,
+    };
+  }
+);
 
 interface ContextState {
   employeesList: Employee[];
+  projectsList: Project[];
   selectedEmployee: Employee | null;
+  selectedProject: Project | null;
 }
 
 interface ContextProps {
   state: ContextState;
   setEmployeesList: (data: Employee[]) => void;
+  setProjectsList: (data: Project[]) => void;
   handleSort: (order: string, value: string) => void;
   addNewEmployee: (data: Employee) => void;
+  addNewProject: (data: Project) => void;
   editEmployee: (data: Employee) => void;
+  editProject: (data: Project) => void;
   removeEmployee: (data: Employee | null) => void;
+  removeProject: (data: Project | null) => void;
   selectEmployee: (data: Employee | null) => void;
+  selectProject: (data: Project | null) => void;
 }
 
 const Context = React.createContext<ContextProps>({
   state: {
     employeesList: addedIdToTheEmployeesList,
+    projectsList: addedIdToTheprojectsList,
     selectedEmployee: null,
+    selectedProject: null,
   },
   setEmployeesList: () => {},
   addNewEmployee: () => {},
   editEmployee: () => {},
   removeEmployee: () => {},
+  setProjectsList: () => {},
+  addNewProject: () => {},
+  editProject: () => {},
+  removeProject: () => {},
   selectEmployee: () => {},
+  selectProject: () => {},
   handleSort: () => {},
 });
 
 function ContextProvider(props: React.PropsWithChildren<{}>) {
   const [state, setState] = React.useState<ContextState>({
     employeesList: addedIdToTheEmployeesList,
+    projectsList: addedIdToTheprojectsList,
     selectedEmployee: null,
+    selectedProject: null,
   });
 
   const setEmployeesList = (data: Employee[]) => {
@@ -53,7 +80,19 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
       employeesList: [...data],
     });
   };
+  const setProjectsList = (data: Project[]) => {
+    setState({
+      ...state,
+      projectsList: [...data],
+    });
+  };
 
+  const addNewProject = (data: Project) => {
+    setState({
+      ...state,
+      projectsList: [data, ...state.projectsList],
+    });
+  };
   const addNewEmployee = (data: Employee) => {
     setState({
       ...state,
@@ -72,6 +111,18 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
       employeesList: [...newList],
     });
   };
+  const editProject = (data: Project) => {
+    const newList = state.projectsList.map((item: Project) => {
+      if (item.id === data.id) {
+        return { ...data };
+      }
+      return item;
+    });
+    setState({
+      ...state,
+      projectsList: [...newList],
+    });
+  };
   const removeEmployee = (data: Employee | null) => {
     const newList = state.employeesList.filter(
       (employee: Employee) => employee.id !== data?.id
@@ -81,10 +132,25 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
       employeesList: [...newList],
     });
   };
+  const removeProject = (data: Project | null) => {
+    const newList = state.projectsList.filter(
+      (product: Project) => product.id !== data?.id
+    );
+    setState({
+      ...state,
+      projectsList: [...newList],
+    });
+  };
   const selectEmployee = (data: Employee | null) => {
     setState({
       ...state,
       selectedEmployee: data,
+    });
+  };
+  const selectProject = (data: Project | null) => {
+    setState({
+      ...state,
+      selectedProject: data,
     });
   };
 
@@ -171,8 +237,13 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
         addNewEmployee,
         editEmployee,
         removeEmployee,
+        setProjectsList,
+        addNewProject,
+        editProject,
+        removeProject,
         handleSort,
         selectEmployee,
+        selectProject,
       }}
     >
       {props.children}

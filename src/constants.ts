@@ -9,10 +9,26 @@ export interface Employee {
     [key: string]: any;
 }
 
+export interface Project {
+    id?: number ;
+    name: string;
+    productPage: string;
+    articlePageText: string;
+    articlePageLink: string;
+    htmlEmail: string;
+    pageLink: string;
+    productImg: string;
+    productImgAltText?: string;
+    [key: string]: any;
+}
+
 export const PopUpVariant = {
     ADD_NEW_EMPLOYEE: 'ADD_NEW_EMPLOYEE',
     EDIT_EMPLOYEE: 'EDIT_EMPLOYEE',
+    ADD_NEW_PROJECT: 'ADD_NEW_PROJECT',
+    EDIT_PROJECT: 'EDIT_PROJECT',
     CONFIRM: 'CONFIRM',
+    CONFIRM_PROJECT: 'CONFIRM_PROJECT',
 }
 
 export const SortProperties = {
@@ -57,6 +73,35 @@ export const TABLE_HEADERS = [{
     {
         title: 'Salary',
         sortProperty: SortProperties.SALARY,
+    },
+];
+export const TABLE_HEADERS_PRODUCTS = [{
+        title: 'Id',
+        sortProperty: SortProperties.ID,
+    },
+    {
+        title: 'Name',
+        sortProperty: SortProperties.NAME,
+    },
+    {
+        title: 'Product Page',
+        sortProperty: SortProperties.NAME,
+    },
+    {
+        title: 'Article Page',
+        sortProperty: SortProperties.POSITION,
+    },
+    {
+        title: 'HTML Email',
+        sortProperty: SortProperties.OFFICE,
+    },
+    {
+        title: 'Page link',
+        sortProperty: SortProperties.AGE,
+    },
+    {
+        title: 'Product image',
+        sortProperty: SortProperties.START_DATE,
     },
 ];
 
