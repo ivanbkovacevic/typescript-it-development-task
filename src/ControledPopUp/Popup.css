@@ -13,3 +13,13 @@
   display: flex;
   justify-content: center;
 }
+
+.buttonMy {
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  border: 1px solid darkred !important;
+  background: none !important;
+  color: darkred !important;
+  padding: 2px !important;
+}

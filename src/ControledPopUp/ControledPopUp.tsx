@@ -15,10 +15,10 @@ const ControlledPopup: React.FC<Props> = ({ src, alt }) => {
     <div>
       <button
         type="button"
-        className="button"
+        className="buttonMy"
         onClick={() => setOpen((o) => !o)}
       >
-        Klik za vecu sliku
+        &#128269; 
       </button>
       <Popup open={open} closeOnDocumentClick onClose={closeModal}>
         <div className="modal">

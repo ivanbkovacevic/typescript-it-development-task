@@ -30,8 +30,10 @@ const TableRowsProjects: React.FC<TableRowsProps> = ({ data }) => {
         </a>
       </td>
       <td>
-        <img src={data.productImg} alt={data.productImgAltText} />
-        <ControlledPopup src={data.productImg} alt={data.productImgAltText} />
+        <div className={style.imgWrapper}>
+          <img src={data.productImg} alt={data.productImgAltText} />
+          <ControlledPopup src={data.productImg} alt={data.productImgAltText} />
+        </div>
       </td>
       <td>
         <button
