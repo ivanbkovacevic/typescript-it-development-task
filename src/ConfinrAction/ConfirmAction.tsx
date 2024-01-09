@@ -2,25 +2,19 @@ import React, { useContext } from "react";
 import { Context } from "../context/context";
 import { ContextUI } from "../context/contextUI";
 import style from "./ConfirmAction.module.scss";
-import { PopUpVariant } from "../constants";
 
 const ConfirmAction: React.FC = () => {
-  const { removeEmployee, removeProject, state } = useContext(Context);
-  const { selectedEmployee, selectedProject } = state;
-  const { togglePopUp, stateUI } = useContext(ContextUI);
-  const { popUpVariant } = stateUI;
+  const {removeProject, state } = useContext(Context);
+  const {  selectedProject } = state;
+  const { togglePopUp } = useContext(ContextUI);
   return (
     <div className={style.wrapper}>
       <h2>
-        Are you sure that you want to remove this{" "}
-        {popUpVariant === PopUpVariant.CONFIRM ? "employee" : "project"}
+        Are you sure that you want to remove this project
       </h2>
       <div className={style.btnsWrapper}>
         <button
           onClick={() => {
-            if(PopUpVariant.CONFIRM) {
-              removeEmployee(selectedEmployee);
-            }
             removeProject(selectedProject);
             togglePopUp();
           }}

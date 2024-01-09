@@ -10,7 +10,7 @@ export interface Employee {
 }
 
 export interface Project {
-    id?: number ;
+    id?: string;
     name: string;
     productPage: string;
     articlePageText: string;
@@ -18,16 +18,13 @@ export interface Project {
     htmlEmail: string;
     pageLink: string;
     productImg: string;
-    productImgAltText?: string;
+    productImgAltText: string;
     [key: string]: any;
 }
 
 export const PopUpVariant = {
-    ADD_NEW_EMPLOYEE: 'ADD_NEW_EMPLOYEE',
-    EDIT_EMPLOYEE: 'EDIT_EMPLOYEE',
     ADD_NEW_PROJECT: 'ADD_NEW_PROJECT',
     EDIT_PROJECT: 'EDIT_PROJECT',
-    CONFIRM: 'CONFIRM',
     CONFIRM_PROJECT: 'CONFIRM_PROJECT',
 }
 
@@ -75,10 +72,7 @@ export const TABLE_HEADERS = [{
         sortProperty: SortProperties.SALARY,
     },
 ];
-export const TABLE_HEADERS_PRODUCTS = [{
-        title: 'Id',
-        sortProperty: SortProperties.ID,
-    },
+export const TABLE_HEADERS_PRODUCTS = [
     {
         title: 'Name',
         sortProperty: SortProperties.NAME,

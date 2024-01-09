@@ -3,7 +3,7 @@ import { Context } from "../../context/context";
 import { ContextUI } from "../../context/contextUI";
 import { Project, PopUpVariant } from "../../constants";
 import style from "./TableRows.module.scss";
-
+import ControlledPopup from "../../ControledPopUp/ControledPopUp";
 
 interface TableRowsProps {
   data: Project;
@@ -12,18 +12,13 @@ interface TableRowsProps {
 const TableRowsProjects: React.FC<TableRowsProps> = ({ data }) => {
   const { selectProject } = useContext(Context);
   const { togglePopUp } = useContext(ContextUI);
+
   return (
-    <tr
-      key={data.id}
-      // onDoubleClick={() => {
-      //   selectProject(data);
-      //   togglePopUp(PopUpVariant.EDIT_PROJECT);
-      // }}
-    >
+    <tr key={data.id}>
       <td>{data.id}</td>
       <td>{data.name}</td>
       <td>
-        <a href={data.productPage} target="_blank">
+        <a href={data.productPage} target="_blank" rel="noreferrer">
           {data.productPage.substring(8)}
         </a>
       </td>
@@ -32,6 +27,7 @@ const TableRowsProjects: React.FC<TableRowsProps> = ({ data }) => {
       <td>{data.pageLink}</td>
       <td>
         <img src={data.productImg} alt={data.productImgAltText} />
+        <ControlledPopup src={data.productImg} alt={data.productImgAltText} />
       </td>
       <td>
         <button
@@ -43,7 +39,8 @@ const TableRowsProjects: React.FC<TableRowsProps> = ({ data }) => {
         >
           Remove
         </button>
-        <button className={style.editBtn}
+        <button
+          className={style.editBtn}
           onClick={(e) => {
             e.stopPropagation();
             selectProject(data);

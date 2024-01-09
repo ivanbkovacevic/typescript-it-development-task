@@ -1,0 +1,15 @@
+.close {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.imgWrapper {
+  display: block;
+}
+
+.popup-content {
+  display: flex;
+  justify-content: center;
+}

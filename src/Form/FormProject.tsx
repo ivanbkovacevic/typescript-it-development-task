@@ -3,7 +3,7 @@ import { Context } from "../context/context";
 import { ContextUI } from "../context/contextUI";
 import { PopUpVariant, Project } from "../constants";
 import style from "./Form.module.scss";
-
+import { v4 as uuid } from 'uuid';
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import TextError from "./TextError/TextError";
@@ -15,39 +15,40 @@ interface FormProps {
 const FormProject: React.FC<FormProps> = ({ formAction }) => {
   const { state, addNewProject, editProject, selectProject } =
     useContext(Context);
-  const { selectedProject, projectsList } = state;
+  const { selectedProject } = state;
   const { togglePopUp, stateUI } = useContext(ContextUI);
   const { popUpVariant } = stateUI;
 
-  console.log(selectedProject)
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
+    productImg: Yup.string().required("Project image is required"),
     productPage: Yup.string().required("Project Page is required"),
     articlePageText: Yup.string().required("Text is required"),
     articlePageLink: Yup.string().required("Page link is required"),
     htmlEmail: Yup.string().required("Html email is required"),
     pageLink: Yup.string().required("Page link is required"),
-    productImg: Yup.string().required("Project image is required"),
-    productImgAltText: Yup.string().required("Project image alt text is required"),
+    productImgAltText: Yup.string().required(
+      "Project image alt text is required"
+    ),
   });
 
   const initialValues = {
     name: "",
+    productImg: "",
     productPage: "",
     articlePageText: "",
     articlePageLink: "",
     htmlEmail: "",
     pageLink: "",
-    productImg: "",
     productImgAltText: "",
-    id: 0,
+    id: "0",
   };
   const handleFormSubmited = (values: Project, actions: any) => {
+    console.log("submit");
     if (formAction === PopUpVariant.ADD_NEW_PROJECT) {
-      addNewProject({ ...values, id: projectsList.length + 1 });
+      addNewProject({ ...values, id: uuid() });
     } else {
       editProject(values);
-      console.log('edit')
     }
     actions.resetForm();
     togglePopUp();
@@ -75,7 +76,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         id: "productImg",
         type: "text",
         required: true,
-        name: "Product Image",
+        name: "productImg",
         placeHolder: "some image",
         value: initialValues.productImg,
       },
@@ -84,7 +85,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         id: "productImgAltText",
         type: "text",
         required: true,
-        name: "Product Image alt Text",
+        name: "productImgAltText",
         placeHolder: "some image text",
         value: initialValues.productImgAltText,
       },
@@ -93,7 +94,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         id: "articlePageText",
         type: "text",
         required: true,
-        name: "Article page text",
+        name: "articlePageText",
         placeHolder: "This page is something",
         value: initialValues.articlePageText,
       },
@@ -102,7 +103,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         id: "htmlEmail",
         type: "text",
         required: true,
-        name: "Html email",
+        name: "htmlEmail",
         placeHolder: "html email",
         value: initialValues.htmlEmail,
       },
@@ -111,7 +112,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         id: "productPage",
         type: "text",
         required: true,
-        name: "Product page",
+        name: "productPage",
         placeHolder: "www.something",
         value: initialValues.productPage,
       },
@@ -120,7 +121,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         id: "articlePageLink",
         type: "text",
         required: true,
-        name: "Article page link",
+        name: "articlePageLink",
         placeHolder: "www.something",
         value: initialValues.articlePageLink,
       },
@@ -129,7 +130,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         id: "pageLink",
         type: "text",
         required: true,
-        name: "Page link",
+        name: "pageLink",
         placeHolder: "www.something...",
         value: initialValues.articlePageLink,
       },
@@ -151,7 +152,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     });
   };
 
-  console.log(initialValues)
+  console.log(initialValues, PopUpVariant);
   return (
     <div className={style.wrapper}>
       <h1 className={style.heading}>

@@ -29,13 +29,14 @@
     color: #fff;
     font-weight: 400;
     padding: 0.65em 1em;
+    position: relative;
   }
   .disabled td {
     color: #4f5f64;
   }
 
   img {
-    max-width: 100px;
+    width: 100px;
   }
   tbody tr {
     transition: background 0.25s ease;
