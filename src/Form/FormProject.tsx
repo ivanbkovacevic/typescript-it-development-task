@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Context } from "../context/context";
 import { ContextUI } from "../context/contextUI";
 import { PopUpVariant, Project } from "../constants";
@@ -43,15 +43,14 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     productImgAltText: "",
     id: "0",
   };
-  const handleFormSubmited = (values: Project, actions: any) => {
+  const handleFormSubmited = (values: Project, { resetForm }:any) => {
     if (formAction === PopUpVariant.ADD_NEW_PROJECT) {
       addNewProject({ ...values, id: uuid() });
     } else {
       editProject(values);
     }
-    actions.resetForm();
+    resetForm();
     togglePopUp();
-    selectProject(null);
   };
 
   const generateFormFields = () => {
@@ -155,7 +154,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
           : "Edit Project"}
       </h1>
       <Formik
-        initialValues={selectedProject || initialValues}
+        initialValues={(popUpVariant === PopUpVariant.ADD_NEW_PROJECT ? null : selectedProject) || initialValues}
         validationSchema={validationSchema}
         onSubmit={handleFormSubmited}
         enableReinitialize={true}
