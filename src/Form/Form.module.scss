@@ -6,7 +6,7 @@
   padding: 2rem;
   .heading {
     margin-bottom: 3rem;
-    color: black ;
+    color: black;
   }
 
   button[type="submit"] {
@@ -39,6 +39,23 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
+    margin-bottom: 1rem;
+
+    input {
+      width: 100%;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    label {
+      margin-bottom: 1rem;
+      text-transform: capitalize;
+    }
+  }
+
+  .inputProdPage {
+    display: flex;
+    justify-content: space-between !important;
     width: 100%;
     margin-bottom: 1rem;
 

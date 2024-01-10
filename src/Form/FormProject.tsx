@@ -168,7 +168,6 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         render={({ values }: any) => (
           <Form>
             {generateFormFields()}
-            <div className={style.inputWrapper}>
               <label htmlFor="productPage">Product page</label>
               <ErrorMessage name="productPage" component={TextError} />
               <FieldArray
@@ -179,7 +178,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
                     {values.productPage && values.productPage.length > 0 ? (
                       values.productPage.map(
                         (prodPage: string, index: number) => (
-                          <div key={index}>
+                          <div className={style.inputProdPage} key={index}>
                             <Field name={`productPage.${index}`} />
                             <button
                               type="button"
@@ -210,7 +209,6 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
                   </div>
                 )}
               />
-            </div>
             <div>
               <button type="submit">
                 {formAction === PopUpVariant.ADD_NEW_PROJECT
