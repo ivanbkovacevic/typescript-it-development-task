@@ -3,8 +3,8 @@ import { Context } from "../context/context";
 import { ContextUI } from "../context/contextUI";
 import { PopUpVariant, Project } from "../constants";
 import style from "./Form.module.scss";
-import { v4 as uuid } from 'uuid';
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { v4 as uuid } from "uuid";
+import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
 import TextError from "./TextError/TextError";
 
@@ -13,8 +13,7 @@ interface FormProps {
 }
 
 const FormProject: React.FC<FormProps> = ({ formAction }) => {
-  const { state, addNewProject, editProject } =
-    useContext(Context);
+  const { state, addNewProject, editProject } = useContext(Context);
   const { selectedProject } = state;
   const { togglePopUp, stateUI } = useContext(ContextUI);
   const { popUpVariant } = stateUI;
@@ -22,7 +21,11 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     productImg: Yup.string().required("Project image is required"),
-    productPage: Yup.string().required("Project Page is required"),
+    productPage: Yup.array().of(
+      Yup.string()
+        .min(5, "Must be at least 5 characters")
+        .required("Product page is required")
+    ),
     articlePageText: Yup.string().required("Text is required"),
     articlePageLink: Yup.string().required("Page link is required"),
     htmlEmail: Yup.string().required("Html email is required"),
@@ -35,7 +38,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
   const initialValues = {
     name: "",
     productImg: "",
-    productPage: "",
+    productPage: [],
     articlePageText: "",
     articlePageLink: "",
     htmlEmail: "",
@@ -43,7 +46,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     productImgAltText: "",
     id: "0",
   };
-  const handleFormSubmited = (values: Project, { resetForm }:any) => {
+  const handleFormSubmited = (values: Project, { resetForm }: any) => {
     if (formAction === PopUpVariant.ADD_NEW_PROJECT) {
       addNewProject({ ...values, id: uuid() });
     } else {
@@ -100,15 +103,15 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         placeHolder: "html email",
         value: initialValues.htmlEmail,
       },
-      {
-        label: "Product page",
-        id: "productPage",
-        type: "text",
-        required: true,
-        name: "productPage",
-        placeHolder: "www.something",
-        value: initialValues.productPage,
-      },
+      // {
+      //   label: "Product page",
+      //   id: "productPage",
+      //   type: "text",
+      //   required: true,
+      //   name: "productPage",
+      //   placeHolder: "www.something",
+      //   value: initialValues.productPage,
+      // },
       {
         label: "Article page link",
         id: "articlePageLink",
@@ -154,20 +157,70 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
           : "Edit Project"}
       </h1>
       <Formik
-        initialValues={(popUpVariant === PopUpVariant.ADD_NEW_PROJECT ? null : selectedProject) || initialValues}
+        initialValues={
+          (popUpVariant === PopUpVariant.ADD_NEW_PROJECT
+            ? null
+            : selectedProject) || initialValues
+        }
         validationSchema={validationSchema}
         onSubmit={handleFormSubmited}
         enableReinitialize={true}
-      >
-        <Form>
-          {generateFormFields()}
-          <button type="submit">
-            {formAction === PopUpVariant.ADD_NEW_PROJECT
-              ? "Add new project"
-              : "Edit project"}
-          </button>
-        </Form>
-      </Formik>
+        render={({ values }: any) => (
+          <Form>
+            {generateFormFields()}
+            <div className={style.inputWrapper}>
+              <label htmlFor="productPage">Product page</label>
+              <ErrorMessage name="productPage" component={TextError} />
+              <FieldArray
+                name="productPage"
+                id="productPage"
+                render={(arrayHelpers: any) => (
+                  <div>
+                    {values.productPage && values.productPage.length > 0 ? (
+                      values.productPage.map(
+                        (prodPage: string, index: number) => (
+                          <div key={index}>
+                            <Field name={`productPage.${index}`} />
+                            <button
+                              type="button"
+                              className={style.addRemoveBtn}
+                              onClick={() => arrayHelpers.remove(index)}
+                            >
+                              -
+                            </button>
+                            <button
+                              type="button"
+                              className={style.addRemoveBtn}
+                              onClick={() => arrayHelpers.insert(index, "")}
+                            >
+                              +
+                            </button>
+                          </div>
+                        )
+                      )
+                    ) : (
+                      <button
+                        className={style.addProdPage}
+                        type="button"
+                        onClick={() => arrayHelpers.push("")}
+                      >
+                        Add a product page
+                      </button>
+                    )}
+                  </div>
+                )}
+              />
+            </div>
+            <div>
+              <button type="submit">
+                {formAction === PopUpVariant.ADD_NEW_PROJECT
+                  ? "Add new project"
+                  : "Edit project"}
+              </button>
+            </div>
+          </Form>
+        )}
+      />
     </div>
   );
 };

@@ -16,18 +16,22 @@ const TableRowsProjects: React.FC<TableRowsProps> = ({ data }) => {
   return (
     <tr key={data.id}>
       <td>{data.name}</td>
-      <td>
-        <a href={data.productPage} target="_blank" rel="noreferrer">
-          {data.productPage.substring(8)}
-        </a>
+      <td className={style.multipleValues}>
+        {data.productPage.map((item) => {
+          return (
+            <a key={item} href={item} target="_blank" rel="noreferrer">
+              {item.substring(8)}
+            </a>
+          );
+        })}
       </td>
       <td>{data.articlePageText}</td>
       <td>{data.htmlEmail}</td>
       <td>
         {" "}
-        <a href={data.productPage} target="_blank" rel="noreferrer">
+        {/* <a href={data.productPage} target="_blank" rel="noreferrer">
           {data.pageLink.substring(8)}
-        </a>
+        </a> */}
       </td>
       <td>
         <div className={style.imgWrapper}>

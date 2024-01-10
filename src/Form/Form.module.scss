@@ -9,9 +9,10 @@
     color: black ;
   }
 
-  button {
+  button[type="submit"] {
     padding: 1rem;
-    margin: 0 auto;
+    margin-left: 40%;
+    margin-top: 30px;
     background: darkGreen;
     color: white;
     border-radius: 0.25em;
@@ -24,6 +25,14 @@
       background-color: grey;
       cursor: not-allowed;
     }
+  }
+
+  .addRemoveBtn {
+    margin: 0 3px;
+  }
+
+  .addProdPage {
+    margin-bottom: 5px;
   }
 
   .inputWrapper {

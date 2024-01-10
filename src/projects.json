@@ -1,60 +1,57 @@
 [
-    {
-        "name": "Mask",
-        "productPage": "https://www.sonicglow.com",
-        "articlePageText": "Some article textqqqqq",
-        "articlePageLink": "https://www.sonicglow.com",
-        "htmlEmail": "qqqhtmlEmfwwailqqqqq",
-        "pageLink":"https://www.sonicglow.com",
-        "productImg": "../../assets/red-light-mask.jpg",
-        "productImgAltText": "red-light-maskwqqqqq",
-        "id":"1"
-      },
-    {
-        "name": "Mini Wand",
-        "productPage": "https://www.sonicglow.com",
-        "articlePageText": "Some article text",
-        "articlePageLink": "https://www.sonicglow.com",
-        "htmlEmail": "aaahtmlEmail",
-        "pageLink":"https://www.sonicglow.com",
-        "productImg": "../../assets/red-light-mini-wand.jpg",
-        "productImgAltText": "red-light-mini-wand",
-        "id":"2"
-
-      },
-    {
-        "name": "Light teeth",
-        "productPage": "https://www.sonicglow.com",
-        "articlePageText": "Some article text",
-        "articlePageLink": "https://www.sonicglow.com",
-        "htmlEmail": "zzzzhtmlEmail",
-        "pageLink":"https://www.sonicglow.com",
-        "productImg": "../../assets/red-light-teeth.jpg",
-        "productImgAltText": "red-light-teeth",
-        "id":"3"
-
-      },
-    {
-        "name": "Red light wand",
-        "productPage": "https://www.sonicglow.com",
-        "articlePageText": "Some article text",
-        "articlePageLink": "https://www.sonicglow.com",
-        "htmlEmail": "ssshtmlEmail",
-        "pageLink": "https://www.sonicglow.com",
-        "productImg": "../../assets/red-light-wand.jpg",
-        "productImgAltText": "red-light-wand",
-        "id":"4"
-      },
-    {
-        "name": "Red light",
-        "productPage": "https://www.sonicglow.com",
-        "articlePageText": "Some article text",
-        "articlePageLink": "https://www.sonicglow.com",
-        "htmlEmail": "ddddhtmlEmail",
-        "pageLink": "https://www.sonicglow.com",
-        "productImg": "../../assets/red-light.jpg",
-        "productImgAltText": "red-light-mask",
-        "id":"5"
-
-      }
+  {
+    "name": "Mask",
+    "productPage": ["https://www.sonicglow.com", "https://www.nike.com"],
+    "articlePageText": "Some article textqqqqq",
+    "articlePageLink": "https://www.sonicglow.com",
+    "htmlEmail": "qqqhtmlEmfwwailqqqqq",
+    "pageLink": "https://www.sonicglow.com",
+    "productImg": "../../assets/red-light-mask.jpg",
+    "productImgAltText": "red-light-maskwqqqqq",
+    "id": "1"
+  },
+  {
+    "name": "Mini Wand",
+    "productPage": ["https://www.sonicglow.com", "https://www.nike.com"],
+    "articlePageText": "Some article text",
+    "articlePageLink": "https://www.sonicglow.com",
+    "htmlEmail": "aaahtmlEmail",
+    "pageLink": "https://www.sonicglow.com",
+    "productImg": "../../assets/red-light-mini-wand.jpg",
+    "productImgAltText": "red-light-mini-wand",
+    "id": "2"
+  },
+  {
+    "name": "Light teeth",
+    "productPage": ["https://www.sonicglow.com", "https://www.nike.com"],
+    "articlePageText": "Some article text",
+    "articlePageLink": "https://www.sonicglow.com",
+    "htmlEmail": "zzzzhtmlEmail",
+    "pageLink": "https://www.sonicglow.com",
+    "productImg": "../../assets/red-light-teeth.jpg",
+    "productImgAltText": "red-light-teeth",
+    "id": "3"
+  },
+  {
+    "name": "Red light wand",
+    "productPage": ["https://www.sonicglow.com", "https://www.nike.com"],
+    "articlePageText": "Some article text",
+    "articlePageLink": "https://www.sonicglow.com",
+    "htmlEmail": "ssshtmlEmail",
+    "pageLink": "https://www.sonicglow.com",
+    "productImg": "../../assets/red-light-wand.jpg",
+    "productImgAltText": "red-light-wand",
+    "id": "4"
+  },
+  {
+    "name": "Red light",
+    "productPage": ["https://www.sonicglow.com", "https://www.nike.com"],
+    "articlePageText": "Some article text",
+    "articlePageLink": "https://www.sonicglow.com",
+    "htmlEmail": "ddddhtmlEmail",
+    "pageLink": "https://www.sonicglow.com",
+    "productImg": "../../assets/red-light.jpg",
+    "productImgAltText": "red-light-mask",
+    "id": "5"
+  }
 ]

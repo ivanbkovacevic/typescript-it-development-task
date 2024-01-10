@@ -12,7 +12,7 @@ export interface Employee {
 export interface Project {
     id?: string;
     name: string;
-    productPage: string;
+    productPage: string[];
     articlePageText: string;
     articlePageLink: string;
     htmlEmail: string;

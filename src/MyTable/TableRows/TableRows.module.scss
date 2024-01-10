@@ -1,7 +1,14 @@
 .editBtn {
-    background: orange !important;
+  background: orange !important;
 }
 
 .imgWrapper {
-    position: relative;
+  position: relative;
+}
+
+.multipleValues {
+  a {
+    display: block;
+    border: 1px solid red;
+  }
 }
