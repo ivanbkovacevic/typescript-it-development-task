@@ -51,13 +51,8 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     }
     actions.resetForm();
     togglePopUp();
+    selectProject(null);
   };
-
-  useEffect(() => {
-    if (popUpVariant === PopUpVariant.ADD_NEW_PROJECT) {
-      selectProject(null);
-    }
-  },[popUpVariant]);
 
   const generateFormFields = () => {
     const fields = [
