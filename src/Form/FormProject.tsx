@@ -22,13 +22,18 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     name: Yup.string().required("Name is required"),
     productImg: Yup.string().required("Project image is required"),
     productPage: Yup.array().of(
-      Yup.string().nullable()
-        .min(10, "Must be at least 10 characters")
+      Yup.string()
+        .nullable()
         .required("Product page is required")
     ),
     articlePageText: Yup.string().required("Text is required"),
-    articlePageLink: Yup.string().required("Page link is required"),
-    htmlEmail: Yup.string().required("Html email is required"),
+    articlePage: Yup.array().of(
+      Yup.string()
+        .nullable()
+        .required("Article page is required")
+    ),
+    htmlEmail: Yup.string().email('Invalid email address')
+    .required('Email address is required'),
     pageLink: Yup.string().required("Page link is required"),
     productImgAltText: Yup.string().required(
       "Project image alt text is required"
@@ -40,7 +45,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     productImg: "",
     productPage: [""],
     articlePageText: "",
-    articlePageLink: "",
+    articlePage: [""],
     htmlEmail: "",
     pageLink: "",
     productImgAltText: "",
@@ -97,7 +102,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
       {
         label: "Html Email",
         id: "htmlEmail",
-        type: "text",
+        type: "email",
         required: true,
         name: "htmlEmail",
         placeHolder: "html email",
@@ -112,15 +117,15 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
       //   placeHolder: "www.something",
       //   value: initialValues.productPage,
       // },
-      {
-        label: "Article page link",
-        id: "articlePageLink",
-        type: "text",
-        required: true,
-        name: "articlePageLink",
-        placeHolder: "www.something",
-        value: initialValues.articlePageLink,
-      },
+      // {
+      //   label: "Article page link",
+      //   id: "articlePage",
+      //   type: "text",
+      //   required: true,
+      //   name: "articlePage",
+      //   placeHolder: "www.something",
+      //   value: initialValues.articlePage,
+      // },
       {
         label: "Page link",
         id: "pageLink",
@@ -128,7 +133,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         required: true,
         name: "pageLink",
         placeHolder: "www.something...",
-        value: initialValues.articlePageLink,
+        value: initialValues.articlePage,
       },
     ];
 
@@ -168,40 +173,72 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         render={({ values }: any) => (
           <Form>
             {generateFormFields()}
-              <label htmlFor="productPage">Product page</label>
-              <ErrorMessage name="productPage" component={TextError} />
-              <FieldArray
-                name="productPage"
-                id="productPage"
-                render={(arrayHelpers: any) => (
-                  <div>
-                    {
-                      values.productPage.map(
-                        (prodPage: string, index: number) => (
-                          <div className={style.inputProdPage} key={index}>
-                            <Field name={`productPage.${index}`} />
-                            <button
-                              type="button"
-                              className={style.addRemoveBtn}
-                              onClick={() => arrayHelpers.remove(index)}
-                            >
-                              -
-                            </button>
-                            <button
-                              type="button"
-                              className={style.addRemoveBtn}
-                              onClick={() => arrayHelpers.insert(index, "")}
-                            >
-                              +
-                            </button>
-                          </div>
-                        )
-                      )
-                    
-                    }
-                  </div>
-                )}
-              />
+            <label htmlFor="productPage">Product page</label>
+            <ErrorMessage name="productPage" component={TextError} />
+            <FieldArray
+              name="productPage"
+              id="productPage"
+              render={(arrayHelpers: any) => (
+                <div>
+                  {values.productPage.map((prodPage: string, index: number) => (
+                    <div className={style.inputProdPage} key={index}>
+                      <Field name={`productPage.${index}`} />
+                      <button
+                        type="button"
+                        className={style.addRemoveBtn}
+                        onClick={() => arrayHelpers.remove(index)}
+                      >
+                        -
+                      </button>
+                      <button
+                        type="button"
+                        className={style.addRemoveBtn}
+                        onClick={() => arrayHelpers.insert(index, "")}
+                      >
+                        +
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            />
+            {/* <div>
+              <button type="submit">
+                {formAction === PopUpVariant.ADD_NEW_PROJECT
+                  ? "Add new project"
+                  : "Edit project"}
+              </button>
+            </div> */}
+
+            <label htmlFor="articlePage">Article page</label>
+            <ErrorMessage name="articlePage" component={TextError} />
+            <FieldArray
+              name="articlePage"
+              id="articlePage"
+              render={(arrayHelpers: any) => (
+                <div>
+                  {values.articlePage.map((prodPage: string, index: number) => (
+                    <div className={style.inputProdPage} key={index}>
+                      <Field name={`articlePage.${index}`} />
+                      <button
+                        type="button"
+                        className={style.addRemoveBtn}
+                        onClick={() => arrayHelpers.remove(index)}
+                      >
+                        -
+                      </button>
+                      <button
+                        type="button"
+                        className={style.addRemoveBtn}
+                        onClick={() => arrayHelpers.insert(index, "")}
+                      >
+                        +
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            />
             <div>
               <button type="submit">
                 {formAction === PopUpVariant.ADD_NEW_PROJECT
