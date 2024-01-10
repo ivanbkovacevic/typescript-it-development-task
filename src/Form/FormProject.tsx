@@ -22,8 +22,8 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     name: Yup.string().required("Name is required"),
     productImg: Yup.string().required("Project image is required"),
     productPage: Yup.array().of(
-      Yup.string()
-        .min(5, "Must be at least 5 characters")
+      Yup.string().nullable()
+        .min(10, "Must be at least 10 characters")
         .required("Product page is required")
     ),
     articlePageText: Yup.string().required("Text is required"),
@@ -38,7 +38,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
   const initialValues = {
     name: "",
     productImg: "",
-    productPage: [],
+    productPage: [""],
     articlePageText: "",
     articlePageLink: "",
     htmlEmail: "",
@@ -175,7 +175,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
                 id="productPage"
                 render={(arrayHelpers: any) => (
                   <div>
-                    {values.productPage && values.productPage.length > 0 ? (
+                    {
                       values.productPage.map(
                         (prodPage: string, index: number) => (
                           <div className={style.inputProdPage} key={index}>
@@ -197,15 +197,8 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
                           </div>
                         )
                       )
-                    ) : (
-                      <button
-                        className={style.addProdPage}
-                        type="button"
-                        onClick={() => arrayHelpers.push("")}
-                      >
-                        Add a product page
-                      </button>
-                    )}
+                    
+                    }
                   </div>
                 )}
               />
