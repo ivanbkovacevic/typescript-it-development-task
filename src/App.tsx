@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ContextUI } from "./context/contextUI";
 import PopUp from "./PopUp/PopUp";
 import { PopUpVariant } from "./constants";
@@ -12,6 +12,15 @@ const App: React.FC = () => {
   const { stateUI, togglePopUp } = useContext(ContextUI);
   const { popUpIsOpen, popUpVariant } = stateUI;
 
+  useEffect(() => {
+    // Set the document title when the component mounts
+    document.title = 'Web development projects';
+
+    // Optionally, you can reset the title when the component unmounts
+    return () => {
+      document.title = 'Default Title';
+    };
+  }, []); 
   const generatePopUpChildren = () => {
     switch (popUpVariant) {
 
