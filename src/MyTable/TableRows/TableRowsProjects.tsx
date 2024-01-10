@@ -25,9 +25,6 @@ const TableRowsProjects: React.FC<TableRowsProps> = ({ data }) => {
           );
         })}
       </td>
-      <td>{data.articlePageText}</td>
-      <td>{data.htmlEmail}</td>
-      <td>
       <td className={style.multipleValues}>
         {data.articlePage.map((item) => {
           return (
@@ -37,7 +34,9 @@ const TableRowsProjects: React.FC<TableRowsProps> = ({ data }) => {
           );
         })}
       </td>
-      </td>
+      <td>{data.htmlEmail}</td>
+      <td>{data.articlePageText}</td>
+
       <td>
         <div className={style.imgWrapper}>
           <img src={data.productImg} alt={data.productImgAltText} />
