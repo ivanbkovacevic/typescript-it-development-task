@@ -44,7 +44,6 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     id: "0",
   };
   const handleFormSubmited = (values: Project, actions: any) => {
-    console.log("submit");
     if (formAction === PopUpVariant.ADD_NEW_PROJECT) {
       addNewProject({ ...values, id: uuid() });
     } else {
@@ -58,7 +57,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     if (popUpVariant === PopUpVariant.ADD_NEW_PROJECT) {
       selectProject(null);
     }
-  });
+  },[popUpVariant]);
 
   const generateFormFields = () => {
     const fields = [
@@ -139,7 +138,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     return fields.map((item) => {
       return (
         <div className={style.inputWrapper} key={item.id}>
-          <label htmlFor={item.id}>{item.name}</label>
+          <label htmlFor={item.id}>{item.label}</label>
           <Field
             type={item.type}
             id={item.id}

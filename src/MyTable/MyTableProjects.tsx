@@ -14,7 +14,6 @@ const MyTableProjects: React.FC<MyTableProps> = () => {
 
   const [numOfRows, setNumOfRows] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
-console.log(projectsList)
   const generateTableHeaders = () => {
     const tableHeaders = TABLE_HEADERS_PRODUCTS.map((item) => {
       return (
