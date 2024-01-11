@@ -9,6 +9,10 @@
     color: black;
   }
 
+  .errorMsg {
+    color: red !important;
+  }
+  
   button[type="submit"] {
     padding: 1rem;
     margin-left: 40%;
@@ -51,6 +55,8 @@
       margin-bottom: 1rem;
       text-transform: capitalize;
     }
+
+    
   }
 
   .inputProdPage {

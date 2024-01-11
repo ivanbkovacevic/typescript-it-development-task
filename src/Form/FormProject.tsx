@@ -6,7 +6,6 @@ import style from "./Form.module.scss";
 import { v4 as uuid } from "uuid";
 import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
-import TextError from "./TextError/TextError";
 
 interface FormProps {
   formAction: string;
@@ -147,7 +146,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
             name={item.name}
             placeholder={item.placeHolder}
           />
-          <ErrorMessage name={item.name} component={TextError} />
+          <ErrorMessage name={item.name} component="div" className={style.errorMsg} />
         </div>
       );
     });
@@ -174,10 +173,10 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
           <Form>
             {generateFormFields()}
             <label htmlFor="productPage">Product page</label>
-            <ErrorMessage name="productPage" component={TextError} />
+            <ErrorMessage name="productPage" component="div" className={style.errorMsg} />
             <FieldArray
               name="productPage"
-              id="productPage"
+              // id="productPage"
               render={(arrayHelpers: any) => (
                 <div>
                   {values.productPage.map((prodPage: string, index: number) => (
@@ -211,10 +210,10 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
             </div> */}
 
             <label htmlFor="articlePage">Article page</label>
-            <ErrorMessage name="articlePage" component={TextError} />
+            <ErrorMessage name="articlePage" component="div" className={style.errorMsg} />
             <FieldArray
               name="articlePage"
-              id="articlePage"
+              // id="articlePage"
               render={(arrayHelpers: any) => (
                 <div>
                   {values.articlePage.map((prodPage: string, index: number) => (
