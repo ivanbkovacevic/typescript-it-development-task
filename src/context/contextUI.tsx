@@ -14,7 +14,7 @@ interface ContextProps {
 const ContextUI = React.createContext<ContextProps>({
   stateUI: {
     popUpIsOpen: false,
-    popUpVariant: PopUpVariant.ADD_NEW_EMPLOYEE,
+    popUpVariant: PopUpVariant.ADD_NEW_PROJECT,
   },
   togglePopUp: () => {},
 });
@@ -22,10 +22,10 @@ const ContextUI = React.createContext<ContextProps>({
 function ContextUIProvider(props: React.PropsWithChildren<{}>) {
   const [stateUI, setState] = React.useState<ContextState>({
     popUpIsOpen: false,
-    popUpVariant: PopUpVariant.ADD_NEW_EMPLOYEE,
+    popUpVariant: PopUpVariant.ADD_NEW_PROJECT,
   });
 
-  const togglePopUp = (variant: string = PopUpVariant.ADD_NEW_EMPLOYEE) => {
+  const togglePopUp = (variant: string = PopUpVariant.ADD_NEW_PROJECT) => {
     setState({
       ...stateUI,
       popUpIsOpen: !stateUI.popUpIsOpen,

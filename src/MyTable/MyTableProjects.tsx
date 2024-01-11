@@ -2,21 +2,20 @@ import React, { useState, useContext } from "react";
 import { Context } from "../context/context";
 import NumOfRows from "./NumOfRows/NumOfRows";
 import Pagination from "./Pagination/Pagination";
-import { SortOrder, TABLE_HEADERS } from "../constants";
+import { SortOrder, TABLE_HEADERS_PRODUCTS } from "../constants";
 import style from "./MyTable.module.scss";
-import TableRows from "./TableRows/TableRows";
+import TableRowsProjects from "./TableRows/TableRowsProjects";
 
 interface MyTableProps {}
 
-const MyTable: React.FC<MyTableProps> = () => {
+const MyTableProjects: React.FC<MyTableProps> = () => {
   const { state, handleSort } = useContext(Context);
-  const { employeesList } = state;
+  const { projectsList } = state;
 
   const [numOfRows, setNumOfRows] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
-
   const generateTableHeaders = () => {
-    const tableHeaders = TABLE_HEADERS.map((item) => {
+    const tableHeaders = TABLE_HEADERS_PRODUCTS.map((item) => {
       return (
         <th key={item.title}>
           <span>{item.title}</span>
@@ -37,12 +36,12 @@ const MyTable: React.FC<MyTableProps> = () => {
   };
 
   const generateTableRows = () => {
-    const pageSettedList = employeesList.slice(
+    const pageSettedList = projectsList.slice(
       numOfRows * (currentPage - 1),
       numOfRows * currentPage
     );
     const tableRows = pageSettedList.map((item, index) => {
-      return <TableRows key={item.id} data={item} />;
+      return <TableRowsProjects key={item.id} data={item} />;
     });
     return tableRows;
   };
@@ -64,7 +63,7 @@ const MyTable: React.FC<MyTableProps> = () => {
         <tbody>{generateTableRows()}</tbody>
       </table>
       <Pagination
-        listLength={employeesList.length}
+        listLength={projectsList.length}
         numOfRows={numOfRows}
         currentPage={currentPage}
         handlePagination={handlePagination}
@@ -73,4 +72,4 @@ const MyTable: React.FC<MyTableProps> = () => {
   );
 };
 
-export default MyTable;
+export default MyTableProjects;
