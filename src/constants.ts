@@ -53,7 +53,7 @@ export const TABLE_HEADERS_PRODUCTS = [
     sortProperty: SortProperties.PRODUCT_PAGE,
   },
   {
-    title: "Article Page",
+    title: "Article page",
     sortProperty: SortProperties.ARTICLE_PAGE,
   },
   {
