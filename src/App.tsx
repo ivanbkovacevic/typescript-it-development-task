@@ -14,7 +14,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     // Set the document title when the component mounts
-    document.title = 'Web development projects';
+    document.title = 'Custom CRUD table';
 
     // Optionally, you can reset the title when the component unmounts
     return () => {
@@ -35,7 +35,7 @@ const App: React.FC = () => {
 
   return (
     <div className={style.wrapper}>
-      <h1>Web Development projects</h1>
+      <h1>Custom CRUD table</h1>
       <button
         className={style.btnAddNew}
         onClick={() => togglePopUp(PopUpVariant.ADD_NEW_PROJECT)}
