@@ -35,7 +35,7 @@ const TableRowsProjects: React.FC<TableRowsProps> = ({ data }) => {
         })}
       </td>
       <td>{data.htmlEmail}</td>
-      <td>{data.articlePageText}</td>
+      <td>{data.pageLink}</td>
 
       <td>
         <div className={style.imgWrapper}>
