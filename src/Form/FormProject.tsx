@@ -107,24 +107,6 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         placeHolder: "html email",
         value: initialValues.htmlEmail,
       },
-      // {
-      //   label: "Product page",
-      //   id: "productPage",
-      //   type: "text",
-      //   required: true,
-      //   name: "productPage",
-      //   placeHolder: "www.something",
-      //   value: initialValues.productPage,
-      // },
-      // {
-      //   label: "Article page link",
-      //   id: "articlePage",
-      //   type: "text",
-      //   required: true,
-      //   name: "articlePage",
-      //   placeHolder: "www.something",
-      //   value: initialValues.articlePage,
-      // },
       {
         label: "Page link",
         id: "pageLink",
@@ -176,7 +158,6 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
             <ErrorMessage name="productPage" component="div" className={style.errorMsg} />
             <FieldArray
               name="productPage"
-              // id="productPage"
               render={(arrayHelpers: any) => (
                 <div>
                   {values.productPage.map((prodPage: string, index: number) => (
@@ -201,19 +182,12 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
                 </div>
               )}
             />
-            {/* <div>
-              <button type="submit">
-                {formAction === PopUpVariant.ADD_NEW_PROJECT
-                  ? "Add new project"
-                  : "Edit project"}
-              </button>
-            </div> */}
+      
 
             <label htmlFor="articlePage">Article page</label>
             <ErrorMessage name="articlePage" component="div" className={style.errorMsg} />
             <FieldArray
               name="articlePage"
-              // id="articlePage"
               render={(arrayHelpers: any) => (
                 <div>
                   {values.articlePage.map((prodPage: string, index: number) => (

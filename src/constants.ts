@@ -30,12 +30,11 @@ export const PopUpVariant = {
 
 export const SortProperties = {
   ID: "id",
-  AGE: "age",
+  PRODUCT_PAGE: "productPage",
+  ARTICLE_PAGE: "articlePage",
   NAME: "name",
-  POSITION: "position",
-  OFFICE: "office",
-  START_DATE: "startDate",
-  SALARY: "salary",
+  HTML_EMAIL:"htmlEmail",
+  PAGE_LINK:"pageLink"
 };
 
 export const SortOrder = {
@@ -43,60 +42,27 @@ export const SortOrder = {
   DESCENDING: "d",
 };
 
-export const TABLE_HEADERS = [
-  {
-    title: "Id",
-    sortProperty: SortProperties.ID,
-  },
-  {
-    title: "Name",
-    sortProperty: SortProperties.NAME,
-  },
-  {
-    title: "Position",
-    sortProperty: SortProperties.POSITION,
-  },
-  {
-    title: "Office",
-    sortProperty: SortProperties.OFFICE,
-  },
-  {
-    title: "Age",
-    sortProperty: SortProperties.AGE,
-  },
-  {
-    title: "Start Date",
-    sortProperty: SortProperties.START_DATE,
-  },
-  {
-    title: "Salary",
-    sortProperty: SortProperties.SALARY,
-  },
-];
 export const TABLE_HEADERS_PRODUCTS = [
+
   {
     title: "Name",
     sortProperty: SortProperties.NAME,
   },
   {
-    title: "Product Page",
-    sortProperty: SortProperties.NAME,
+    title: "Product page",
+    sortProperty: SortProperties.PRODUCT_PAGE,
   },
   {
     title: "Article Page",
-    sortProperty: SortProperties.POSITION,
+    sortProperty: SortProperties.ARTICLE_PAGE,
   },
   {
-    title: "HTML Email",
-    sortProperty: SortProperties.OFFICE,
+    title: "htmlEmail",
+    sortProperty: SortProperties.HTML_EMAIL,
   },
   {
     title: "Page link",
-    sortProperty: SortProperties.AGE,
-  },
-  {
-    title: "Product image",
-    sortProperty: SortProperties.START_DATE,
+    sortProperty: SortProperties.PAGE_LINK,
   },
 ];
 

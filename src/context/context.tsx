@@ -119,11 +119,17 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
       case value === SortProperties.ID && order === SortOrder.DESCENDING:
         sortingDescending(SortProperties.ID);
         break;
-      case value === SortProperties.AGE && order === SortOrder.ASCENDING:
-        sortingAscending(SortProperties.AGE);
+      case value === SortProperties.PRODUCT_PAGE && order === SortOrder.ASCENDING:
+        sortingAscending(SortProperties.PRODUCT_PAGE);
         break;
-      case value === SortProperties.AGE && order === SortOrder.DESCENDING:
-        sortingDescending(SortProperties.AGE);
+      case value === SortProperties.PRODUCT_PAGE && order === SortOrder.DESCENDING:
+        sortingDescending(SortProperties.PRODUCT_PAGE);
+        break;
+      case value === SortProperties.ARTICLE_PAGE && order === SortOrder.ASCENDING:
+        sortingAscending(SortProperties.ARTICLE_PAGE);
+        break;
+      case value === SortProperties.ARTICLE_PAGE && order === SortOrder.DESCENDING:
+        sortingDescending(SortProperties.ARTICLE_PAGE);
         break;
       case value === SortProperties.NAME && order === SortOrder.ASCENDING:
         sortingAscending(SortProperties.NAME);
@@ -131,30 +137,18 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
       case value === SortProperties.NAME && order === SortOrder.DESCENDING:
         sortingDescending(SortProperties.NAME);
         break;
-      case value === SortProperties.POSITION && order === SortOrder.ASCENDING:
-        sortingAscending(SortProperties.POSITION);
+      case value === SortProperties.HTML_EMAIL && order === SortOrder.ASCENDING:
+        sortingAscending(SortProperties.HTML_EMAIL);
         break;
-      case value === SortProperties.POSITION && order === SortOrder.DESCENDING:
-        sortingDescending(SortProperties.POSITION);
+      case value === SortProperties.HTML_EMAIL && order === SortOrder.DESCENDING:
+        sortingDescending(SortProperties.HTML_EMAIL);
         break;
-      case value === SortProperties.OFFICE && order === SortOrder.ASCENDING:
-        sortingAscending(SortProperties.OFFICE);
+      case value === SortProperties.PAGE_LINK && order === SortOrder.ASCENDING:
+        sortingAscending(SortProperties.PAGE_LINK);
         break;
-      case value === SortProperties.OFFICE && order === SortOrder.DESCENDING:
-        sortingDescending(SortProperties.OFFICE);
-        break;
-      case value === SortProperties.START_DATE && order === SortOrder.ASCENDING:
-        sortingAscending(SortProperties.START_DATE);
-        break;
-      case value === SortProperties.START_DATE &&
+      case value === SortProperties.PAGE_LINK &&
         order === SortOrder.DESCENDING:
-        sortingDescending(SortProperties.START_DATE);
-        break;
-      case value === SortProperties.SALARY && order === SortOrder.ASCENDING:
-        sortingAscending(SortProperties.SALARY);
-        break;
-      case value === SortProperties.SALARY && order === SortOrder.DESCENDING:
-        sortingDescending(SortProperties.SALARY);
+        sortingDescending(SortProperties.PAGE_LINK);
         break;
       default:
         break;
