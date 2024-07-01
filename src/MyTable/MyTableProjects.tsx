@@ -4,7 +4,6 @@ import NumOfRows from "./NumOfRows/NumOfRows";
 import Pagination from "./Pagination/Pagination";
 import {
   SortOrder,
-  SortProperties,
   TABLE_HEADERS_PRODUCTS,
 } from "../constants";
 import style from "./MyTable.module.scss";
