@@ -10,4 +10,4 @@ Pagination is also implemented.
 
 Project is writen in Typescript.
 
-To see live example click here 
+To see live example click here https://custom-table-itd.netlify.app/
