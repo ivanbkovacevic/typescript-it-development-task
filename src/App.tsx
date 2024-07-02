@@ -4,7 +4,7 @@ import PopUp from "./PopUp/PopUp";
 import { PopUpVariant } from "./constants";
 import "./globals.scss";
 import style from "./App.module.scss";
-import ConfirmAction from "./ConfinrAction/ConfirmAction";
+import ConfirmAction from "./ConfirmAction/ConfirmAction";
 import MyTableProjects from "./MyTable/MyTableProjects";
 import FormProject from "./Form/FormProject";
 
@@ -13,17 +13,14 @@ const App: React.FC = () => {
   const { popUpIsOpen, popUpVariant } = stateUI;
 
   useEffect(() => {
-    // Set the document title when the component mounts
-    document.title = 'Custom CRUD table';
+    document.title = "Custom CRUD table";
 
-    // Optionally, you can reset the title when the component unmounts
     return () => {
-      document.title = 'Default Title';
+      document.title = "Default Title";
     };
-  }, []); 
+  }, []);
   const generatePopUpChildren = () => {
     switch (popUpVariant) {
-
       case PopUpVariant.ADD_NEW_PROJECT:
         return <FormProject formAction={PopUpVariant.ADD_NEW_PROJECT} />;
       case PopUpVariant.CONFIRM_PROJECT:

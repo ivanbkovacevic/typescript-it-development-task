@@ -2,7 +2,6 @@ import React from "react";
 import projects from "../projects.json";
 import { SortOrder, SortProperties, Project } from "../constants";
 
-
 const projectsString = JSON.stringify(projects);
 const productsParsed = JSON.parse(projectsString);
 
@@ -40,7 +39,6 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
     selectedProject: null,
   });
 
-
   const setProjectsList = (data: Project[]) => {
     setState({
       ...state,
@@ -54,7 +52,6 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
       projectsList: [data, ...state.projectsList],
     });
   };
-
 
   const editProject = (data: Project) => {
     const newList = state.projectsList.map((item: Project) => {
@@ -87,7 +84,7 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
   };
 
   const sortingAscending = (property: string) => {
-    const sorted = state.projectsList.sort((a: any, b: any) => {
+    const sorted = state.projectsList.sort((a: Project, b: Project) => {
       if (a[property] < b[property]) {
         return -1;
       }
@@ -99,7 +96,7 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
     setProjectsList([...sorted]);
   };
   const sortingDescending = (property: string) => {
-    const sorted = state.projectsList.sort((a: any, b: any) => {
+    const sorted = state.projectsList.sort((a: Project, b: Project) => {
       if (a[property] > b[property]) {
         return -1;
       }
@@ -119,16 +116,20 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
       case value === SortProperties.ID && order === SortOrder.DESCENDING:
         sortingDescending(SortProperties.ID);
         break;
-      case value === SortProperties.PRODUCT_PAGE && order === SortOrder.ASCENDING:
+      case value === SortProperties.PRODUCT_PAGE &&
+        order === SortOrder.ASCENDING:
         sortingAscending(SortProperties.PRODUCT_PAGE);
         break;
-      case value === SortProperties.PRODUCT_PAGE && order === SortOrder.DESCENDING:
+      case value === SortProperties.PRODUCT_PAGE &&
+        order === SortOrder.DESCENDING:
         sortingDescending(SortProperties.PRODUCT_PAGE);
         break;
-      case value === SortProperties.ARTICLE_PAGE && order === SortOrder.ASCENDING:
+      case value === SortProperties.ARTICLE_PAGE &&
+        order === SortOrder.ASCENDING:
         sortingAscending(SortProperties.ARTICLE_PAGE);
         break;
-      case value === SortProperties.ARTICLE_PAGE && order === SortOrder.DESCENDING:
+      case value === SortProperties.ARTICLE_PAGE &&
+        order === SortOrder.DESCENDING:
         sortingDescending(SortProperties.ARTICLE_PAGE);
         break;
       case value === SortProperties.NAME && order === SortOrder.ASCENDING:
@@ -140,14 +141,14 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
       case value === SortProperties.HTML_EMAIL && order === SortOrder.ASCENDING:
         sortingAscending(SortProperties.HTML_EMAIL);
         break;
-      case value === SortProperties.HTML_EMAIL && order === SortOrder.DESCENDING:
+      case value === SortProperties.HTML_EMAIL &&
+        order === SortOrder.DESCENDING:
         sortingDescending(SortProperties.HTML_EMAIL);
         break;
       case value === SortProperties.PAGE_LINK && order === SortOrder.ASCENDING:
         sortingAscending(SortProperties.PAGE_LINK);
         break;
-      case value === SortProperties.PAGE_LINK &&
-        order === SortOrder.DESCENDING:
+      case value === SortProperties.PAGE_LINK && order === SortOrder.DESCENDING:
         sortingDescending(SortProperties.PAGE_LINK);
         break;
       default:
