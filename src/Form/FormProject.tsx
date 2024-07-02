@@ -4,7 +4,7 @@ import { ContextUI } from "../context/contextUI";
 import { PopUpVariant, Project } from "../constants";
 import style from "./Form.module.scss";
 import { v4 as uuid } from "uuid";
-import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
+import { Formik, Field, Form, ErrorMessage, FieldArray, FormikHelpers } from "formik";
 import * as Yup from "yup";
 
 interface FormProps {
@@ -47,7 +47,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     productImgAltText: "",
     id: "0",
   };
-  const handleFormSubmited = (values: Project, { resetForm }: any ) => {
+  const handleFormSubmited = (values: Project, { resetForm }: FormikHelpers<Project> ) => {
     if (formAction === PopUpVariant.ADD_NEW_PROJECT) {
       addNewProject({ ...values, id: uuid() });
     } else {
@@ -150,8 +150,8 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         }
         validationSchema={validationSchema}
         onSubmit={handleFormSubmited}
-        enableReinitialize={true}
-        render={({ values }: any) => (
+        enableReinitialize={true}>
+        {({ values }) => (
           <Form>
             {generateFormFields()}
             <label htmlFor="productPage">Product page</label>
@@ -162,7 +162,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
             />
             <FieldArray
               name="productPage"
-              render={(arrayHelpers: any) => (
+              render={(arrayHelpers: { remove: (arg0: number) => void; insert: (arg0: number, arg1: string) => void; }) => (
                 <div>
                   {values.productPage.map((prodPage: string, index: number) => (
                     <div className={style.inputProdPage} key={index}>
@@ -195,7 +195,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
             />
             <FieldArray
               name="articlePage"
-              render={(arrayHelpers: any) => (
+              render={(arrayHelpers: { remove: (arg0: number) => void; insert: (arg0: number, arg1: string) => void; }) => (
                 <div>
                   {values.articlePage.map((prodPage: string, index: number) => (
                     <div className={style.inputProdPage} key={index}>
@@ -228,7 +228,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
             </div>
           </Form>
         )}
-      />
+      </Formik>
     </div>
   );
 };
