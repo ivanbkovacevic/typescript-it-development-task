@@ -1,16 +1,5 @@
-export interface Employee {
-  id?: number;
-  age: string;
-  name: string;
-  position: string;
-  office: string;
-  startDate: string;
-  salary: string;
-  [key: string]: any;
-}
-
 export interface Project {
-  id?: string;
+  id: string;
   name: string;
   productPage: string[];
   articlePageText: string;
@@ -19,7 +8,7 @@ export interface Project {
   pageLink: string;
   productImg: string;
   productImgAltText: string;
-  [key: string]: any;
+  [key: string]: string | string[];
 }
 
 export const PopUpVariant = {
@@ -33,17 +22,11 @@ export const SortProperties = {
   PRODUCT_PAGE: "productPage",
   ARTICLE_PAGE: "articlePage",
   NAME: "name",
-  HTML_EMAIL:"htmlEmail",
-  PAGE_LINK:"pageLink"
-};
-
-export const SortOrder = {
-  ASCENDING: "a",
-  DESCENDING: "d",
+  HTML_EMAIL: "htmlEmail",
+  PAGE_LINK: "pageLink",
 };
 
 export const TABLE_HEADERS_PRODUCTS = [
-
   {
     title: "Name",
     sortProperty: SortProperties.NAME,
