@@ -8,7 +8,7 @@ interface ContextState {
 
 interface ContextProps {
   stateUI: ContextState;
-  togglePopUp: (v?: string ) => void;
+  togglePopUp: (v?: string) => void;
 }
 
 const ContextUI = React.createContext<ContextProps>({
@@ -32,7 +32,6 @@ function ContextUIProvider(props: React.PropsWithChildren<{}>) {
       popUpVariant: variant,
     });
   };
-
 
   return (
     <ContextUI.Provider

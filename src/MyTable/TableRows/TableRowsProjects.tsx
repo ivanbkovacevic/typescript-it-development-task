@@ -19,7 +19,12 @@ const TableRowsProjects: React.FC<TableRowsProps> = ({ data }) => {
       <td className={style.multipleValues}>
         {data.productPage.map((item) => {
           return (
-            <a key={item} href={`https://${item}`} target="_blank" rel="noreferrer">
+            <a
+              key={item}
+              href={`https://${item}`}
+              target="_blank"
+              rel="noreferrer"
+            >
               {item}
             </a>
           );
@@ -28,7 +33,12 @@ const TableRowsProjects: React.FC<TableRowsProps> = ({ data }) => {
       <td className={style.multipleValues}>
         {data.articlePage.map((item) => {
           return (
-            <a key={item} href={`https://${item}`} target="_blank" rel="noreferrer">
+            <a
+              key={item}
+              href={`https://${item}`}
+              target="_blank"
+              rel="noreferrer"
+            >
               {item}
             </a>
           );

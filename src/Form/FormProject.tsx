@@ -4,7 +4,7 @@ import { ContextUI } from "../context/contextUI";
 import { PopUpVariant, Project } from "../constants";
 import style from "./Form.module.scss";
 import { v4 as uuid } from "uuid";
-import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
+import { Formik, Field, Form, ErrorMessage, FieldArray, FormikHelpers } from "formik";
 import * as Yup from "yup";
 
 interface FormProps {
@@ -21,18 +21,15 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     name: Yup.string().required("Name is required"),
     productImg: Yup.string().required("Project image is required"),
     productPage: Yup.array().of(
-      Yup.string()
-        .nullable()
-        .required("Product page is required")
+      Yup.string().nullable().required("Product page is required")
     ),
     articlePageText: Yup.string().required("Text is required"),
     articlePage: Yup.array().of(
-      Yup.string()
-        .nullable()
-        .required("Article page is required")
+      Yup.string().nullable().required("Article page is required")
     ),
-    htmlEmail: Yup.string().email('Invalid email address')
-    .required('Email address is required'),
+    htmlEmail: Yup.string()
+      .email("Invalid email address")
+      .required("Email address is required"),
     pageLink: Yup.string().required("Page link is required"),
     productImgAltText: Yup.string().required(
       "Project image alt text is required"
@@ -50,7 +47,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
     productImgAltText: "",
     id: "0",
   };
-  const handleFormSubmited = (values: Project, { resetForm }: any) => {
+  const handleFormSubmited = (values: Project, { resetForm }: FormikHelpers<Project> ) => {
     if (formAction === PopUpVariant.ADD_NEW_PROJECT) {
       addNewProject({ ...values, id: uuid() });
     } else {
@@ -128,13 +125,16 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
             name={item.name}
             placeholder={item.placeHolder}
           />
-          <ErrorMessage name={item.name} component="div" className={style.errorMsg} />
+          <ErrorMessage
+            name={item.name}
+            component="div"
+            className={style.errorMsg}
+          />
         </div>
       );
     });
   };
 
-  console.log(initialValues, PopUpVariant);
   return (
     <div className={style.wrapper}>
       <h1 className={style.heading}>
@@ -150,15 +150,19 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
         }
         validationSchema={validationSchema}
         onSubmit={handleFormSubmited}
-        enableReinitialize={true}
-        render={({ values }: any) => (
+        enableReinitialize={true}>
+        {({ values }) => (
           <Form>
             {generateFormFields()}
             <label htmlFor="productPage">Product page</label>
-            <ErrorMessage name="productPage" component="div" className={style.errorMsg} />
+            <ErrorMessage
+              name="productPage"
+              component="div"
+              className={style.errorMsg}
+            />
             <FieldArray
               name="productPage"
-              render={(arrayHelpers: any) => (
+              render={(arrayHelpers: { remove: (arg0: number) => void; insert: (arg0: number, arg1: string) => void; }) => (
                 <div>
                   {values.productPage.map((prodPage: string, index: number) => (
                     <div className={style.inputProdPage} key={index}>
@@ -182,13 +186,16 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
                 </div>
               )}
             />
-      
 
             <label htmlFor="articlePage">Article page</label>
-            <ErrorMessage name="articlePage" component="div" className={style.errorMsg} />
+            <ErrorMessage
+              name="articlePage"
+              component="div"
+              className={style.errorMsg}
+            />
             <FieldArray
               name="articlePage"
-              render={(arrayHelpers: any) => (
+              render={(arrayHelpers: { remove: (arg0: number) => void; insert: (arg0: number, arg1: string) => void; }) => (
                 <div>
                   {values.articlePage.map((prodPage: string, index: number) => (
                     <div className={style.inputProdPage} key={index}>
@@ -221,7 +228,7 @@ const FormProject: React.FC<FormProps> = ({ formAction }) => {
             </div>
           </Form>
         )}
-      />
+      </Formik>
     </div>
   );
 };
